@@ -1,6 +1,7 @@
 #!/bin/bash
 #$ -cwd
 #$ -l rnet,mem_free=10G,h_vmem=10G,h_fsize=300G
+#$ -pe local 4
 #$ -N download
 #$ -o logs/download.txt
 #$ -e logs/download.txt
