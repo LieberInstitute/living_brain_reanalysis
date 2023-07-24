@@ -1,6 +1,6 @@
 #!/bin/bash
 #$ -cwd
-#$ -l mem_free=10G,h_vmem=10G,h_fsize=100G
+#$ -l rnet,mem_free=10G,h_vmem=10G,h_fsize=300G
 #$ -N download
 #$ -o logs/download.txt
 #$ -e logs/download.txt
