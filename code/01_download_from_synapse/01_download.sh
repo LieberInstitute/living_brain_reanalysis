@@ -22,10 +22,19 @@ module load synapse/2.6.0
 ## List current modules for reproducibility
 module list
 
+## Study metadata files
+synapse \
+    get \
+        -q "SELECT * FROM syn11346063.39 WHERE ( \`resourceType\` = 'metadata' ) AND ( ( \"study\" HAS ( 'LBP' ) ) )" \
+        --downloadLocation ../../raw-data/psychENCODE/v2023-07-14/metadata
+
+## RNAseq FASTQ files
+## Note: this includes LBP_individual_metadata.csv and
+## LBP_biospeciment_metadata.csv which are duplicated with the metadata files.
 synapse \
     get \
         -q "SELECT * FROM syn11346063.39 WHERE ( \"study\" HAS ( 'LBP' ) )" \
-        --downloadLocation ../../raw-data/psychENCODE/v2023-07-14
+        --downloadLocation ../../raw-data/psychENCODE/v2023-07-14/RNAseq
 
 echo "**** Job ends ****"
 date
