@@ -24,7 +24,7 @@ module list
 
 synapse \
     get \
-        -q "SELECT * FROM syn11346063.39" \
+        -q "SELECT * FROM syn11346063.39 WHERE ( \"study\" HAS ( 'LBP' ) )" \
         --downloadLocation ../../raw-data/psychENCODE/v2023-07-14
 
 echo "**** Job ends ****"
