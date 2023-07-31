@@ -18,7 +18,7 @@ echo "Hostname: ${HOSTNAME}"
 echo "Task id: ${SGE_TASK_ID}"
 
 ## Load the Synapse module
-module load synapse/2.6.0
+module load synapse/2.7.2
 
 ## List current modules for reproducibility
 module list
