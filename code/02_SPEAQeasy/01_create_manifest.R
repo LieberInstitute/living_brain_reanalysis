@@ -33,8 +33,8 @@ unique(synapse_missing$specimenID) %in% synapse_present$specimenID
 
 ## Official syntax from https://adknowledgeportal.synapse.org/Explore/Studies/DetailsPage/StudyData?Study=syn26337520
 # synapse get -q "SELECT * FROM syn11346063.39 WHERE ( \"study\" HAS ( 'LBP' ) ) AND ( \"specimenID\" LIKE '%LBPSEMA4BRAIN639%' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN730%' )"
-paste(paste0("\"specimenID\" LIKE '%", unique(synapse_missing$specimenID), "' OR"), collapse = "")
-# "\"specimenID\" LIKE '%LBPSEMA4BRAIN639' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN730' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN176' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN285' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN469' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN043' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN141' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN085' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN607' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN401' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN348' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN478' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN402' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN778' OR\"specimenID\" LIKE '%LBPSEMA4BRAIN623' OR"
+paste(paste0("\"specimenID\" LIKE '%", unique(synapse_missing$specimenID), "' OR"), collapse = " ")
+# "\"specimenID\" LIKE '%LBPSEMA4BRAIN639' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN730' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN176' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN285' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN469' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN043' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN141' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN085' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN607' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN401' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN348' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN478' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN402' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN778' OR \"specimenID\" LIKE '%LBPSEMA4BRAIN623' OR"
 
 ## Reproducibility information
 print("Reproducibility information:")
