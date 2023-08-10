@@ -15,7 +15,7 @@ nextflow $base_dir/code/02_SPEAQeasy/SPEAQeasy/main.nf \
     --sample "paired" \
     --reference "hg38" \
     --strand "reverse" \
-    --strand_mode "declare" \
+    --strand_mode "strict" \
     --annotation "/dcs04/lieber/lcolladotor/annotationFiles_LIBD001/SPEAQeasy/Annotation" \
     -with-report "${base_dir}/processed-data/02_SPEAQeasy/execution_reports/02-run_pipeline.html" \
     -w "${base_dir}/processed-data/02_SPEAQeasy/work" \
