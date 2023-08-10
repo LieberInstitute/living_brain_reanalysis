@@ -128,6 +128,7 @@ write.table(
     file = file.path(dir_rdata, "samples.manifest"),
     sep = "\t",
     col.names = FALSE,
+    row.names = FALSE,
     quote = FALSE
 )
 
