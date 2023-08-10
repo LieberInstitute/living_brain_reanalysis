@@ -8,7 +8,7 @@
 #  Get absolute path to the repo origin
 base_dir=$(git rev-parse --show-toplevel)
 
-module load nextflow/22.10.7
+module load nextflow/20.01.0
 export _JAVA_OPTIONS="-Xms8g -Xmx10g"
 
 nextflow $base_dir/code/02_SPEAQeasy/SPEAQeasy/main.nf \
