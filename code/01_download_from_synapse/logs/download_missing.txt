@@ -1,0 +1,28 @@
+Loading LIBD module for git-status-size/github
+Loading LIBD module for git-lfs/2.8.0
+Loading LIBD module for rmate/1.5.10
+Loading LIBD module for ruby/3.1.2
+Loading conda_R/4.3
+**** Job starts ****
+Mon Jul 31 13:43:55 EDT 2023
+**** JHPCE info ****
+User: lcollado
+Job id: 3662132
+Job name: download_missing
+Hostname: transfer-01.cm.cluster
+Task id: undefined
+Loading LIBD module for synapse/2.7.2
+
+Currently Loaded Modules:
+  1) JHPCE_tools/1.0                 8) git-lfs/2.8.0
+  2) sge/8.1.9                       9) ruby/3.1.2
+  3) gcc/4.4.7                      10) rmate/1.5.10
+  4) COMMUNITY_CENTOS7_DEFAULT_ENV  11) conda/3-4.11.0
+  5) JHPCE_CENTOS7_DEFAULT_ENV      12) conda_R/4.3
+  6) git-status-size/github         13) synapse/2.7.2
+  7) git/2.28.0
+
+ 
+
+**** Job ends ****
+Mon Jul 31 18:06:50 EDT 2023
