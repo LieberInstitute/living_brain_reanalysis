@@ -2,6 +2,7 @@ library("readxl")
 library("jaffelab")
 library("edgeR")
 library("here")
+library("SummarizedExperiment")
 library("sessioninfo")
 
 pcHeatmap <-
@@ -312,3 +313,116 @@ Sys.time()
 proc.time()
 options(width = 120)
 sessioninfo::session_info()
+
+# ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────
+#  setting  value
+#  version  R version 4.3.1 (2023-06-16)
+#  os       macOS Ventura 13.5
+#  system   aarch64, darwin20
+#  ui       RStudio
+#  language (EN)
+#  collate  en_US.UTF-8
+#  ctype    en_US.UTF-8
+#  tz       America/New_York
+#  date     2023-09-07
+#  rstudio  2023.06.1+524 Mountain Hydrangea (desktop)
+#  pandoc   3.1.5 @ /opt/homebrew/bin/pandoc
+#
+# ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+#  package              * version   date (UTC) lib source
+#  abind                  1.4-5     2016-07-21 [1] CRAN (R 4.3.0)
+#  Biobase              * 2.60.0    2023-04-25 [1] Bioconductor
+#  BiocGenerics         * 0.46.0    2023-04-25 [1] Bioconductor
+#  bitops                 1.0-7     2021-04-24 [1] CRAN (R 4.3.0)
+#  brio                   1.1.3     2021-11-30 [1] CRAN (R 4.3.0)
+#  cachem                 1.0.8     2023-05-01 [1] CRAN (R 4.3.0)
+#  callr                  3.7.3     2022-11-02 [1] CRAN (R 4.3.0)
+#  cellranger             1.1.0     2016-07-27 [1] CRAN (R 4.3.0)
+#  cli                    3.6.1     2023-03-23 [1] CRAN (R 4.3.0)
+#  colorout               1.2-2     2023-05-06 [1] Github (jalvesaq/colorout@79931fd)
+#  crayon                 1.5.2     2022-09-29 [1] CRAN (R 4.3.0)
+#  data.table             1.14.8    2023-02-17 [1] CRAN (R 4.3.0)
+#  DelayedArray           0.26.7    2023-07-30 [1] Bioconductor
+#  devtools             * 2.4.5     2022-10-11 [1] CRAN (R 4.3.0)
+#  digest                 0.6.33    2023-07-07 [1] CRAN (R 4.3.0)
+#  dplyr                  1.1.3     2023-09-03 [1] CRAN (R 4.3.0)
+#  edgeR                * 3.42.4    2023-05-31 [1] Bioconductor
+#  ellipsis               0.3.2     2021-04-29 [1] CRAN (R 4.3.0)
+#  fansi                  1.0.4     2023-01-22 [1] CRAN (R 4.3.0)
+#  fastmap                1.1.1     2023-02-24 [1] CRAN (R 4.3.0)
+#  fs                     1.6.3     2023-07-20 [1] CRAN (R 4.3.0)
+#  gargle                 1.5.2     2023-07-20 [1] CRAN (R 4.3.0)
+#  generics               0.1.3     2022-07-05 [1] CRAN (R 4.3.0)
+#  GenomeInfoDb         * 1.36.2    2023-08-27 [1] Bioconductor
+#  GenomeInfoDbData       1.2.10    2023-05-06 [1] Bioconductor
+#  GenomicRanges        * 1.52.0    2023-04-25 [1] Bioconductor
+#  glue                   1.6.2     2022-02-24 [1] CRAN (R 4.3.0)
+#  googledrive            2.1.1     2023-06-11 [1] CRAN (R 4.3.0)
+#  here                 * 1.0.1     2020-12-13 [1] CRAN (R 4.3.0)
+#  hms                    1.1.3     2023-03-21 [1] CRAN (R 4.3.0)
+#  htmltools              0.5.6     2023-08-10 [1] CRAN (R 4.3.0)
+#  htmlwidgets            1.6.2     2023-03-17 [1] CRAN (R 4.3.0)
+#  httpuv                 1.6.11    2023-05-11 [1] CRAN (R 4.3.0)
+#  IRanges              * 2.34.1    2023-07-02 [1] Bioconductor
+#  jaffelab             * 0.99.32   2023-05-06 [1] Github (LieberInstitute/jaffelab@7b7afe3)
+#  later                  1.3.1     2023-05-02 [1] CRAN (R 4.3.0)
+#  lattice              * 0.21-8    2023-04-05 [1] CRAN (R 4.3.1)
+#  lifecycle              1.0.3     2022-10-07 [1] CRAN (R 4.3.0)
+#  limma                * 3.56.2    2023-06-04 [1] Bioconductor
+#  locfit                 1.5-9.8   2023-06-11 [1] CRAN (R 4.3.0)
+#  lubridate              1.9.2     2023-02-10 [1] CRAN (R 4.3.0)
+#  magrittr               2.0.3     2022-03-30 [1] CRAN (R 4.3.0)
+#  MASS                   7.3-60    2023-05-04 [1] CRAN (R 4.3.1)
+#  Matrix                 1.6-1     2023-08-14 [1] CRAN (R 4.3.0)
+#  MatrixGenerics       * 1.12.3    2023-07-30 [1] Bioconductor
+#  matrixStats          * 1.0.0     2023-06-02 [1] CRAN (R 4.3.0)
+#  memoise                2.0.1     2021-11-26 [1] CRAN (R 4.3.0)
+#  mime                   0.12      2021-09-28 [1] CRAN (R 4.3.0)
+#  miniUI                 0.1.1.1   2018-05-18 [1] CRAN (R 4.3.0)
+#  nlme                   3.1-163   2023-08-09 [1] CRAN (R 4.3.0)
+#  pillar                 1.9.0     2023-03-22 [1] CRAN (R 4.3.0)
+#  pkgbuild               1.4.2     2023-06-26 [1] CRAN (R 4.3.0)
+#  pkgconfig              2.0.3     2019-09-22 [1] CRAN (R 4.3.0)
+#  pkgload                1.3.2.1   2023-07-08 [1] CRAN (R 4.3.0)
+#  prettyunits            1.1.1     2020-01-24 [1] CRAN (R 4.3.0)
+#  processx               3.8.2     2023-06-30 [1] CRAN (R 4.3.0)
+#  profvis                0.3.8     2023-05-02 [1] CRAN (R 4.3.0)
+#  promises               1.2.1     2023-08-10 [1] CRAN (R 4.3.0)
+#  prompt                 1.0.2     2023-08-31 [1] CRAN (R 4.3.0)
+#  ps                     1.7.5     2023-04-18 [1] CRAN (R 4.3.0)
+#  purrr                  1.0.2     2023-08-10 [1] CRAN (R 4.3.0)
+#  R6                     2.5.1     2021-08-19 [1] CRAN (R 4.3.0)
+#  rafalib              * 1.0.0     2015-08-09 [1] CRAN (R 4.3.0)
+#  RColorBrewer         * 1.1-3     2022-04-03 [1] CRAN (R 4.3.0)
+#  Rcpp                   1.0.11    2023-07-06 [1] CRAN (R 4.3.0)
+#  RCurl                  1.98-1.12 2023-03-27 [1] CRAN (R 4.3.0)
+#  readxl               * 1.4.3     2023-07-06 [1] CRAN (R 4.3.0)
+#  remotes                2.4.2.1   2023-07-18 [1] CRAN (R 4.3.0)
+#  rlang                  1.1.1     2023-04-28 [1] CRAN (R 4.3.0)
+#  rprojroot              2.0.3     2022-04-02 [1] CRAN (R 4.3.0)
+#  rsthemes               0.4.0     2023-05-06 [1] Github (gadenbuie/rsthemes@34a55a4)
+#  rstudioapi             0.15.0    2023-07-07 [1] CRAN (R 4.3.0)
+#  S4Arrays               1.0.5     2023-07-30 [1] Bioconductor
+#  S4Vectors            * 0.38.1    2023-05-02 [1] Bioconductor
+#  segmented              1.6-4     2023-04-13 [1] CRAN (R 4.3.0)
+#  sessioninfo          * 1.2.2     2021-12-06 [1] CRAN (R 4.3.0)
+#  shiny                  1.7.5     2023-08-12 [1] CRAN (R 4.3.0)
+#  stringi                1.7.12    2023-01-11 [1] CRAN (R 4.3.0)
+#  stringr                1.5.0     2022-12-02 [1] CRAN (R 4.3.0)
+#  SummarizedExperiment * 1.30.2    2023-06-11 [1] Bioconductor
+#  suncalc                0.5.1     2022-09-29 [1] CRAN (R 4.3.0)
+#  testthat             * 3.1.10    2023-07-06 [1] CRAN (R 4.3.0)
+#  tibble                 3.2.1     2023-03-20 [1] CRAN (R 4.3.0)
+#  tidyselect             1.2.0     2022-10-10 [1] CRAN (R 4.3.0)
+#  timechange             0.2.0     2023-01-11 [1] CRAN (R 4.3.0)
+#  urlchecker             1.0.1     2021-11-30 [1] CRAN (R 4.3.0)
+#  usethis              * 2.2.2     2023-07-06 [1] CRAN (R 4.3.0)
+#  utf8                   1.2.3     2023-01-31 [1] CRAN (R 4.3.0)
+#  vctrs                  0.6.3     2023-06-14 [1] CRAN (R 4.3.0)
+#  xtable                 1.8-4     2019-04-21 [1] CRAN (R 4.3.0)
+#  XVector                0.40.0    2023-04-25 [1] Bioconductor
+#  zlibbioc               1.46.0    2023-04-25 [1] Bioconductor
+#
+#  [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
+#
+# ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
