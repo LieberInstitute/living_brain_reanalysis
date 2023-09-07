@@ -64,6 +64,9 @@ pca <- prcomp(t(log_rpkm))
 # use their genes for FDR calc
 eIndex <- which(rowData(rse_gene)$ensembl_id %in% res$ensembl_id)
 
+## For simplicity later on, I'll use this varaible name
+rse_gene$samplingAge <- rse_gene$ageDeath_num.biospecimen
+
 ## model
 mod <- model.matrix(
     ~ COI + race + sex + diagnosis +
@@ -191,7 +194,7 @@ rse_liv <- rse_gene[, rse_gene$COI == "LIV"]
 
 ## model
 mod_liv <- model.matrix(
-    ~ samplingage + race + sex + diagnosis +
+    ~ samplingAge + race + sex + diagnosis +
         rin + recount_qc.star.uniquely_mapped_reads_perc + cellPC +
         recount_qc.aligned_readsperc.chrm +
         recount_qc.aligned_readsperc.chrx +
@@ -244,7 +247,7 @@ rse_pm <- rse_gene[, rse_gene$COI == "PM"]
 
 ## model
 mod_pm <- model.matrix(
-    ~ samplingage + race + sex + diagnosis +
+    ~ samplingAge + race + sex + diagnosis +
         rin + recount_qc.star.uniquely_mapped_reads_perc + cellPC +
         recount_qc.aligned_readsperc.chrm +
         recount_qc.aligned_readsperc.chrx +
