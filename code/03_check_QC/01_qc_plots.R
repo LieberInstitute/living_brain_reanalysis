@@ -173,7 +173,7 @@ for (i in seq(along = gIndexes)) {
 
 dev.off()
 
-pdf("plots/intron_vs_COI.pdf")
+pdf(file.path(dir_plots, "totalAssignedGene_vs_COI.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 1.7,
@@ -182,7 +182,7 @@ par(
 palette(brewer.pal(4, "Dark2"))
 boxplot(
     colData(rse_gene)[, nn[1]] ~ rse_gene$COI,
-    ylab = gsub("recount_qc.", "", nn[1], fixed = TRUE),
+    ylab = nn[1],
     xlab = "",
     outline = FALSE,
     ylim = range(colData(rse_gene)[, nn[1]])
