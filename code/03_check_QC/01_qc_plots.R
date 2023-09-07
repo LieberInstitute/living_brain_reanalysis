@@ -59,18 +59,9 @@ res <-
 res <- res[order(res$P.Value), ]
 colnames(res)[c(1, 8)] <- c("ensembl_id", "de_status")
 
-
-### get monorail data for qc
-options(recount3_url = "https://neuro-recount-ds.s3.amazonaws.com/recount3")
-hp <- available_projects()
-rse_gene <- create_rse(hp[hp$project == "LBP", ])
-seqlevels(rse_gene, pruning.mode = "coarse") <-
-    paste0("chr", c(1:22, "X", "Y", "M"))
-assay(rse_gene, "counts") <- transform_counts(rse_gene)
-assay(rse_gene, "raw_counts") <- NULL # drop raw counts
-
-## allow line up
-rowData(rse_gene)$ensembl_id <- ss(rownames(rse_gene), "\\.")
+## Load SPEAQeasy gene level data
+rse_gene <- readRDS(here("processed-data", "02_SPEAQeasy", "rse_gene_living_brain_reanalysis_n516.Rds"))
+rowData(rse_gene)$ensembl_id <- rowData(rse_gene)$ensemblID
 
 ## phenotype data
 colnames(colData(rse_gene)) <-
