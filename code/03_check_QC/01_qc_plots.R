@@ -196,7 +196,7 @@ points(
 dev.off()
 
 ## PC2
-pdf("plots/PC2_vs_exonic.pdf")
+pdf(file.path(dir_plots, "PC2_vs_totalAssignedGene.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 1.7,
@@ -204,15 +204,15 @@ par(
 )
 palette(brewer.pal(4, "Dark2"))
 plot(
-    pca$x[, 2] ~ colData(rse_gene)[, nn[2]],
-    xlab = gsub("recount_qc.", "", nn[2], fixed = TRUE),
+    pca$x[, 2] ~ colData(rse_gene)[, nn[1]],
+    xlab = nn[1],
     ylab = paste0("PC2: ", pcaVars[2], "% Var Expl"),
     pch = 21,
     bg = rse_gene$COI
 )
 for (i in seq(along = gIndexes)) {
     ii <- gIndexes[[i]]
-    abline(lm(pca$x[, 2] ~ colData(rse_gene)[, nn[2]], subset = ii),
+    abline(lm(pca$x[, 2] ~ colData(rse_gene)[, nn[1]], subset = ii),
         lwd = 4,
         col = i
     )
