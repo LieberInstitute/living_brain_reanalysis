@@ -129,7 +129,7 @@ dev.off()
 
 
 ## PC1
-pdf("plots/PC1_vs_COI.pdf")
+pdf(file.path(dir_plots, "PC1_vs_COI.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 1.7,
