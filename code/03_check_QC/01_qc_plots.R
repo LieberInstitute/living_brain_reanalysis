@@ -16,10 +16,11 @@ pcHeatmap <-
         n <- min(10, ncol(pca$x))
         vars <- colnames(colData(rse))[sapply(colData(rse), class) ==
             "numeric"]
+        vars <- vars[!grepl("ageDeath_num.individual|_R2|_R1|readLength", vars)]
         ccPcaMetrics <- cor(pca$x[, 1:n], as.data.frame(colData(rse)[
             ,
             vars
-        ]))
+        ]), use = "complete.obs")
         tPcaMetrics <-
             ccPcaMetrics / sqrt((1 - ccPcaMetrics^2) / (ncol(rse) - 2))
         pvalPcaMetrics <- 2 * pt(-abs(tPcaMetrics), df = ncol(rse) - 1)
