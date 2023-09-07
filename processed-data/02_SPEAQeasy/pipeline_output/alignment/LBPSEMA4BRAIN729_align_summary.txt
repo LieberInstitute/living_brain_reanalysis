@@ -1,0 +1,15 @@
+9714059 reads; of these:
+  9714059 (100.00%) were paired; of these:
+    523998 (5.39%) aligned concordantly 0 times
+    7873722 (81.05%) aligned concordantly exactly 1 time
+    1316339 (13.55%) aligned concordantly >1 times
+    ----
+    523998 pairs aligned concordantly 0 times; of these:
+      83484 (15.93%) aligned discordantly 1 time
+    ----
+    440514 pairs aligned 0 times concordantly or discordantly; of these:
+      881028 mates make up the pairs; of these:
+        288916 (32.79%) aligned 0 times
+        380718 (43.21%) aligned exactly 1 time
+        211394 (23.99%) aligned >1 times
+98.51% overall alignment rate

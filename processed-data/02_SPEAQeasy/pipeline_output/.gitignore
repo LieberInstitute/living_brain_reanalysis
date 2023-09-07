@@ -1,0 +1,7 @@
+counts
+fastQC
+kallisto_tx
+merged_variants
+variant_calls
+trimming
+infer_strandness
