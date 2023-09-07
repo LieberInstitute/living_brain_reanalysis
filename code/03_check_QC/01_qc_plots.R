@@ -91,29 +91,28 @@ pcHeatmap(rse_gene, pca, plotdir = dir_plots, pthresh = 20)
 ###### example plots
 vars <-
     colnames(colData(rse_gene))[sapply(colData(rse_gene), class) == "numeric"]
-vars <- vars[!grepl("postmortem", vars)]
+vars <- vars[!grepl("ageDeath_num.individual|_R2|_R1|readLength|postmortem", vars)]
 ccPcaMetrics <-
-    cor(pca$x[, 1:10], as.data.frame(colData(rse_gene)[, vars]))
-nn <- c("recount_qc.intron_sum_perc", "recount_qc.gene_fc.all_perc")
+    cor(pca$x[, 1:10], as.data.frame(colData(rse_gene)[, vars]), use = "complete.obs")
+nn <- c("totalAssignedGene")
 ccPcaMetrics[1:3, nn]
 gIndexes <- splitit(rse_gene$COI)
 
 ##  each variable vs COI
-pdf("plots/Vars_vs_coi.pdf")
+pdf(file.path(dir_plots, "Vars_vs_coi.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 2,
     cex.lab = 2
 )
 palette(brewer.pal(4, "Dark2"))
-vars_nam <- gsub("recount_qc.", "", vars, fixed = TRUE)
 for (i in seq(along = vars)) {
     boxplot(
         colData(rse_gene)[, vars[i]] ~ rse_gene$COI,
-        ylab = vars_nam[i],
+        ylab = vars[i],
         xlab = "",
         outline = FALSE,
-        ylim = range(colData(rse_gene)[, vars[i]])
+        ylim = range(colData(rse_gene)[, vars[i]], na.rm = TRUE)
     )
     points(
         colData(rse_gene)[, vars[i]] ~
