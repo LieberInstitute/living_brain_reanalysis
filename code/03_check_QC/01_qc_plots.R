@@ -5,6 +5,9 @@ library("here")
 library("SummarizedExperiment")
 library("sessioninfo")
 
+## For reproducing the jitter output
+set.seed(20230907)
+
 pcHeatmap <-
     function(rse,
     pca,
@@ -83,7 +86,7 @@ dge <- calcNormFactors(dge)
 
 ### PCA
 log_rpkm <-
-    rpkm(dge, gene.length = rowData(rse_gene)$score, log = TRUE)
+    rpkm(dge, gene.length = rowData(rse_gene)$Length, log = TRUE)
 pca <- prcomp(t(log_rpkm))
 pcaVars <- getPcaVars(pca)
 
