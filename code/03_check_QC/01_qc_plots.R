@@ -1,8 +1,9 @@
-#####
-library(recount3)
-library(readxl)
-library(jaffelab)
-library(edgeR)
+library("readxl")
+library("jaffelab")
+library("edgeR")
+library("here")
+library("sessioninfo")
+
 
 pcHeatmap = function (rse, pca, plotdir, pthresh = 10, width = 12, height = 14) {
     library(RColorBrewer)
@@ -186,3 +187,10 @@ points(colData(rse_gene)[,nn[2]]  ~
 dev.off()
 
 boxplot(rse_gene$recount_qc.aligned_readsperc.chrm ~ rse_gene$COI)
+
+## Reproducibility information
+print("Reproducibility information:")
+Sys.time()
+proc.time()
+options(width = 120)
+sessioninfo::session_info()
