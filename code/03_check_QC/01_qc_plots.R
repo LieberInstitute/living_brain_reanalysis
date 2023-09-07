@@ -285,7 +285,26 @@ for (i in seq(along = gIndexes)) {
 }
 dev.off()
 
-boxplot(rse_gene$mitoRate ~ rse_gene$COI)
+
+pdf(file.path(dir_plots, "mitoRate_vs_COI.pdf"))
+par(
+    mar = c(4, 6, 2, 2),
+    cex.axis = 1.7,
+    cex.lab = 1.7
+)
+palette(brewer.pal(4, "Dark2"))
+boxplot(
+    rse_gene$mitoRate ~ rse_gene$COI,
+    xlab = "",
+    ylab = paste0("mitoRate"),
+    ylim = range(rse_gene$mitoRate),
+    outline = FALSE
+)
+points(rse_gene$mitoRate ~ jitter(as.numeric(rse_gene$COI), amount = 0.15),
+    pch = 21,
+    bg = rse_gene$COI
+)
+dev.off()
 
 ## Reproducibility information
 print("Reproducibility information:")
