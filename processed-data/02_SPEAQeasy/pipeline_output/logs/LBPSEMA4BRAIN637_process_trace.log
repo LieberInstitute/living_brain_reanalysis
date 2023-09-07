@@ -1,0 +1,117 @@
+#########################
+  Sample LBPSEMA4BRAIN637
+#########################
+
+
+######################################################
+  Process 1: PreprocessInputs
+######################################################
+
+    Working directory: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/e3/4e51d75e9fb3cf28fedad10163b12a
+    Exit code for process: 0
+    Command run:
+
+--------------------------------- BEGIN COMMANDS -------------
+#!/bin/bash -euo pipefail
+Rscript preprocess_inputs.R -p TRUE
+cp .command.log preprocess_inputs.log
+--------------------------------- END COMMANDS ---------------
+
+    Process appeared to complete without errors. Log is here: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/e3/4e51d75e9fb3cf28fedad10163b12a/.command.log
+
+
+######################################################
+  Process 2: CompleteManifest
+######################################################
+
+    Working directory: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/f9/8b43e706a5efe90ffa38debc16b09e
+    Exit code for process: 0
+    Command run:
+
+--------------------------------- BEGIN COMMANDS -------------
+#!/bin/bash -euo pipefail
+Rscript complete_manifest.R
+--------------------------------- END COMMANDS ---------------
+
+    Process appeared to complete without errors. Log is here: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/f9/8b43e706a5efe90ffa38debc16b09e/.command.log
+
+
+######################################################
+  Process 3: BamSort
+######################################################
+
+    Working directory: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/aa/5fe99b72ca8cb35c908bde55c29420
+    Exit code for process: 0
+    Command run:
+
+--------------------------------- BEGIN COMMANDS -------------
+#!/bin/bash -euo pipefail
+samtools sort -T temporary -l 6 --no-PG -@ 1 LBPSEMA4BRAIN637.bam -o LBPSEMA4BRAIN637_sorted.bam
+samtools index LBPSEMA4BRAIN637_sorted.bam
+--------------------------------- END COMMANDS ---------------
+
+    Process appeared to complete without errors. Log is here: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/aa/5fe99b72ca8cb35c908bde55c29420/.command.log
+
+
+######################################################
+  Process 4: PrimaryAlignments
+######################################################
+
+    Working directory: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/14/df8499fe0dd81149e3a8fafa8954b5
+    Exit code for process: 0
+    Command run:
+
+--------------------------------- BEGIN COMMANDS -------------
+#!/bin/bash -euo pipefail
+samtools view -@ 1 -bh -F 0x100 LBPSEMA4BRAIN637_sorted.bam > LBPSEMA4BRAIN637.bam
+samtools index LBPSEMA4BRAIN637.bam
+--------------------------------- END COMMANDS ---------------
+
+    Process appeared to complete without errors. Log is here: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/14/df8499fe0dd81149e3a8fafa8954b5/.command.log
+
+
+######################################################
+  Process 5: VariantsMerge
+######################################################
+
+    Working directory: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/0a/e441b0343b5a92f5078b2507993c42
+    Exit code for process: 0
+    Command run:
+
+--------------------------------- BEGIN COMMANDS -------------
+#!/bin/bash -euo pipefail
+bcftools merge LBPSEMA4BRAIN014.vcf.gz LBPSEMA4BRAIN017.vcf.gz LBPSEMA4BRAIN001.vcf.gz LBPSEMA4BRAIN037.vcf.gz LBPSEMA4BRAIN026.vcf.gz LBPSEMA4BRAIN005.vcf.gz LBPSEMA4BRAIN016.vcf.gz LBPSEMA4BRAIN765.vcf.gz LBPSEMA4BRAIN015.vcf.gz LBPSEMA4BRAIN048.vcf.gz LBPSEMA4BRAIN719.vcf.gz LBPSEMA4BRAIN025.vcf.gz LBPSEMA4BRAIN259.vcf.gz LBPSEMA4BRAIN031.vcf.gz LBPSEMA4BRAIN051.vcf.gz LBPSEMA4BRAIN391.vcf.gz LBPSEMA4BRAIN227.vcf.gz LBPSEMA4BRAIN272.vcf.gz LBPSEMA4BRAIN201.vcf.gz LBPSEMA4BRAIN247.vcf.gz LBPSEMA4BRAIN262.vcf.gz LBPSEMA4BRAIN284.vcf.gz LBPSEMA4BRAIN285.vcf.gz LBPSEMA4BRAIN008.vcf.gz LBPSEMA4BRAIN529.vcf.gz LBPSEMA4BRAIN028.vcf.gz LBPSEMA4BRAIN034.vcf.gz LBPSEMA4BRAIN141.vcf.gz LBPSEMA4BRAIN135.vcf.gz LBPSEMA4BRAIN019.vcf.gz LBPSEMA4BRAIN289.vcf.gz LBPSEMA4BRAIN282.vcf.gz LBPSEMA4BRAIN612.vcf.gz LBPSEMA4BRAIN094.vcf.gz LBPSEMA4BRAIN122.vcf.gz LBPSEMA4BRAIN718.vcf.gz LBPSEMA4BRAIN003.vcf.gz LBPSEMA4BRAIN273.vcf.gz LBPSEMA4BRAIN047.vcf.gz LBPSEMA4BRAIN250.vcf.gz LBPSEMA4BRAIN685.vcf.gz LBPSEMA4BRAIN565.vcf.gz LBPSEMA4BRAIN531.vcf.gz LBPSEMA4BRAIN651.vcf.gz LBPSEMA4BRAIN138.vcf.gz LBPSEMA4BRAIN576.vcf.gz LBPSEMA4BRAIN435.vcf.gz LBPSEMA4BRAIN460.vcf.gz LBPSEMA4BRAIN382.vcf.gz LBPSEMA4BRAIN354.vcf.gz LBPSEMA4BRAIN414.vcf.gz LBPSEMA4BRAIN248.vcf.gz LBPSEMA4BRAIN466.vcf.gz LBPSEMA4BRAIN032.vcf.gz LBPSEMA4BRAIN131.vcf.gz LBPSEMA4BRAIN129.vcf.gz LBPSEMA4BRAIN436.vcf.gz LBPSEMA4BRAIN578.vcf.gz LBPSEMA4BRAIN134.vcf.gz LBPSEMA4BRAIN597.vcf.gz LBPSEMA4BRAIN408.vcf.gz LBPSEMA4BRAIN039.vcf.gz LBPSEMA4BRAIN555.vcf.gz LBPSEMA4BRAIN040.vcf.gz LBPSEMA4BRAIN010.vcf.gz LBPSEMA4BRAIN702.vcf.gz LBPSEMA4BRAIN681.vcf.gz LBPSEMA4BRAIN769.vcf.gz LBPSEMA4BRAIN045.vcf.gz LBPSEMA4BRAIN655.vcf.gz LBPSEMA4BRAIN659.vcf.gz LBPSEMA4BRAIN550.vcf.gz LBPSEMA4BRAIN453.vcf.gz LBPSEMA4BRAIN745.vcf.gz LBPSEMA4BRAIN747.vcf.gz LBPSEMA4BRAIN222.vcf.gz LBPSEMA4BRAIN653.vcf.gz LBPSEMA4BRAIN479.vcf.gz LBPSEMA4BRAIN157.vcf.gz LBPSEMA4BRAIN478.vcf.gz LBPSEMA4BRAIN336.vcf.gz LBPSEMA4BRAIN427.vcf.gz LBPSEMA4BRAIN607.vcf.gz LBPSEMA4BRAIN699.vcf.gz LBPSEMA4BRAIN277.vcf.gz LBPSEMA4BRAIN092.vcf.gz LBPSEMA4BRAIN223.vcf.gz LBPSEMA4BRAIN173.vcf.gz LBPSEMA4BRAIN242.vcf.gz LBPSEMA4BRAIN713.vcf.gz LBPSEMA4BRAIN562.vcf.gz LBPSEMA4BRAIN610.vcf.gz LBPSEMA4BRAIN753.vcf.gz LBPSEMA4BRAIN708.vcf.gz LBPSEMA4BRAIN186.vcf.gz LBPSEMA4BRAIN527.vcf.gz LBPSEMA4BRAIN588.vcf.gz LBPSEMA4BRAIN054.vcf.gz LBPSEMA4BRAIN215.vcf.gz LBPSEMA4BRAIN365.vcf.gz LBPSEMA4BRAIN340.vcf.gz LBPSEMA4BRAIN274.vcf.gz LBPSEMA4BRAIN519.vcf.gz LBPSEMA4BRAIN249.vcf.gz LBPSEMA4BRAIN083.vcf.gz LBPSEMA4BRAIN345.vcf.gz LBPSEMA4BRAIN691.vcf.gz LBPSEMA4BRAIN044.vcf.gz LBPSEMA4BRAIN637.vcf.gz LBPSEMA4BRAIN514.vcf.gz LBPSEMA4BRAIN152.vcf.gz LBPSEMA4BRAIN258.vcf.gz LBPSEMA4BRAIN571.vcf.gz LBPSEMA4BRAIN542.vcf.gz LBPSEMA4BRAIN089.vcf.gz LBPSEMA4BRAIN043.vcf.gz LBPSEMA4BRAIN035.vcf.gz LBPSEMA4BRAIN439.vcf.gz LBPSEMA4BRAIN316.vcf.gz LBPSEMA4BRAIN317.vcf.gz LBPSEMA4BRAIN145.vcf.gz LBPSEMA4BRAIN634.vcf.gz LBPSEMA4BRAIN577.vcf.gz LBPSEMA4BRAIN290.vcf.gz LBPSEMA4BRAIN275.vcf.gz LBPSEMA4BRAIN204.vcf.gz LBPSEMA4BRAIN266.vcf.gz LBPSEMA4BRAIN625.vcf.gz LBPSEMA4BRAIN331.vcf.gz LBPSEMA4BRAIN350.vcf.gz LBPSEMA4BRAIN741.vcf.gz LBPSEMA4BRAIN413.vcf.gz LBPSEMA4BRAIN513.vcf.gz LBPSEMA4BRAIN081.vcf.gz LBPSEMA4BRAIN280.vcf.gz LBPSEMA4BRAIN200.vcf.gz LBPSEMA4BRAIN502.vcf.gz LBPSEMA4BRAIN128.vcf.gz LBPSEMA4BRAIN567.vcf.gz LBPSEMA4BRAIN312.vcf.gz LBPSEMA4BRAIN656.vcf.gz LBPSEMA4BRAIN432.vcf.gz LBPSEMA4BRAIN512.vcf.gz LBPSEMA4BRAIN516.vcf.gz LBPSEMA4BRAIN323.vcf.gz LBPSEMA4BRAIN629.vcf.gz LBPSEMA4BRAIN368.vcf.gz LBPSEMA4BRAIN203.vcf.gz LBPSEMA4BRAIN450.vcf.gz LBPSEMA4BRAIN324.vcf.gz LBPSEMA4BRAIN279.vcf.gz LBPSEMA4BRAIN758.vcf.gz LBPSEMA4BRAIN170.vcf.gz LBPSEMA4BRAIN409.vcf.gz LBPSEMA4BRAIN143.vcf.gz LBPSEMA4BRAIN724.vcf.gz LBPSEMA4BRAIN080.vcf.gz LBPSEMA4BRAIN701.vcf.gz LBPSEMA4BRAIN159.vcf.gz LBPSEMA4BRAIN712.vcf.gz LBPSEMA4BRAIN191.vcf.gz LBPSEMA4BRAIN751.vcf.gz LBPSEMA4BRAIN214.vcf.gz LBPSEMA4BRAIN006.vcf.gz LBPSEMA4BRAIN553.vcf.gz LBPSEMA4BRAIN419.vcf.gz LBPSEMA4BRAIN392.vcf.gz LBPSEMA4BRAIN175.vcf.gz LBPSEMA4BRAIN096.vcf.gz LBPSEMA4BRAIN192.vcf.gz LBPSEMA4BRAIN401.vcf.gz LBPSEMA4BRAIN124.vcf.gz LBPSEMA4BRAIN205.vcf.gz LBPSEMA4BRAIN381.vcf.gz LBPSEMA4BRAIN202.vcf.gz LBPSEMA4BRAIN626.vcf.gz LBPSEMA4BRAIN506.vcf.gz LBPSEMA4BRAIN510.vcf.gz LBPSEMA4BRAIN541.vcf.gz LBPSEMA4BRAIN209.vcf.gz LBPSEMA4BRAIN322.vcf.gz LBPSEMA4BRAIN021.vcf.gz LBPSEMA4BRAIN224.vcf.gz LBPSEMA4BRAIN388.vcf.gz LBPSEMA4BRAIN494.vcf.gz LBPSEMA4BRAIN447.vcf.gz LBPSEMA4BRAIN183.vcf.gz LBPSEMA4BRAIN046.vcf.gz LBPSEMA4BRAIN785.vcf.gz LBPSEMA4BRAIN268.vcf.gz LBPSEMA4BRAIN110.vcf.gz LBPSEMA4BRAIN371.vcf.gz LBPSEMA4BRAIN125.vcf.gz LBPSEMA4BRAIN178.vcf.gz LBPSEMA4BRAIN764.vcf.gz LBPSEMA4BRAIN288.vcf.gz LBPSEMA4BRAIN796.vcf.gz LBPSEMA4BRAIN351.vcf.gz LBPSEMA4BRAIN686.vcf.gz LBPSEMA4BRAIN360.vcf.gz LBPSEMA4BRAIN195.vcf.gz LBPSEMA4BRAIN499.vcf.gz LBPSEMA4BRAIN126.vcf.gz LBPSEMA4BRAIN443.vcf.gz LBPSEMA4BRAIN390.vcf.gz LBPSEMA4BRAIN106.vcf.gz LBPSEMA4BRAIN111.vcf.gz LBPSEMA4BRAIN033.vcf.gz LBPSEMA4BRAIN523.vcf.gz LBPSEMA4BRAIN140.vcf.gz LBPSEMA4BRAIN146.vcf.gz LBPSEMA4BRAIN091.vcf.gz LBPSEMA4BRAIN254.vcf.gz LBPSEMA4BRAIN341.vcf.gz LBPSEMA4BRAIN366.vcf.gz LBPSEMA4BRAIN402.vcf.gz LBPSEMA4BRAIN418.vcf.gz LBPSEMA4BRAIN674.vcf.gz LBPSEMA4BRAIN721.vcf.gz LBPSEMA4BRAIN650.vcf.gz LBPSEMA4BRAIN297.vcf.gz LBPSEMA4BRAIN664.vcf.gz LBPSEMA4BRAIN002.vcf.gz LBPSEMA4BRAIN004.vcf.gz LBPSEMA4BRAIN022.vcf.gz LBPSEMA4BRAIN020.vcf.gz LBPSEMA4BRAIN023.vcf.gz LBPSEMA4BRAIN703.vcf.gz LBPSEMA4BRAIN239.vcf.gz LBPSEMA4BRAIN596.vcf.gz LBPSEMA4BRAIN403.vcf.gz LBPSEMA4BRAIN652.vcf.gz LBPSEMA4BRAIN491.vcf.gz LBPSEMA4BRAIN711.vcf.gz LBPSEMA4BRAIN404.vcf.gz LBPSEMA4BRAIN407.vcf.gz LBPSEMA4BRAIN663.vcf.gz LBPSEMA4BRAIN137.vcf.gz LBPSEMA4BRAIN736.vcf.gz LBPSEMA4BRAIN733.vcf.gz LBPSEMA4BRAIN570.vcf.gz LBPSEMA4BRAIN684.vcf.gz LBPSEMA4BRAIN193.vcf.gz LBPSEMA4BRAIN429.vcf.gz LBPSEMA4BRAIN781.vcf.gz LBPSEMA4BRAIN677.vcf.gz LBPSEMA4BRAIN066.vcf.gz LBPSEMA4BRAIN257.vcf.gz LBPSEMA4BRAIN147.vcf.gz LBPSEMA4BRAIN172.vcf.gz LBPSEMA4BRAIN314.vcf.gz LBPSEMA4BRAIN380.vcf.gz LBPSEMA4BRAIN495.vcf.gz LBPSEMA4BRAIN302.vcf.gz LBPSEMA4BRAIN120.vcf.gz LBPSEMA4BRAIN030.vcf.gz LBPSEMA4BRAIN164.vcf.gz LBPSEMA4BRAIN208.vcf.gz LBPSEMA4BRAIN133.vcf.gz LBPSEMA4BRAIN338.vcf.gz LBPSEMA4BRAIN457.vcf.gz LBPSEMA4BRAIN581.vcf.gz LBPSEMA4BRAIN613.vcf.gz LBPSEMA4BRAIN013.vcf.gz LBPSEMA4BRAIN497.vcf.gz LBPSEMA4BRAIN480.vcf.gz LBPSEMA4BRAIN176.vcf.gz LBPSEMA4BRAIN477.vcf.gz LBPSEMA4BRAIN346.vcf.gz LBPSEMA4BRAIN228.vcf.gz LBPSEMA4BRAIN662.vcf.gz LBPSEMA4BRAIN167.vcf.gz LBPSEMA4BRAIN308.vcf.gz LBPSEMA4BRAIN446.vcf.gz LBPSEMA4BRAIN158.vcf.gz LBPSEMA4BRAIN611.vcf.gz LBPSEMA4BRAIN474.vcf.gz LBPSEMA4BRAIN451.vcf.gz LBPSEMA4BRAIN367.vcf.gz LBPSEMA4BRAIN730.vcf.gz LBPSEMA4BRAIN088.vcf.gz LBPSEMA4BRAIN221.vcf.gz LBPSEMA4BRAIN695.vcf.gz LBPSEMA4BRAIN739.vcf.gz LBPSEMA4BRAIN644.vcf.gz LBPSEMA4BRAIN038.vcf.gz LBPSEMA4BRAIN524.vcf.gz LBPSEMA4BRAIN406.vcf.gz LBPSEMA4BRAIN353.vcf.gz LBPSEMA4BRAIN104.vcf.gz LBPSEMA4BRAIN633.vcf.gz LBPSEMA4BRAIN526.vcf.gz LBPSEMA4BRAIN469.vcf.gz LBPSEMA4BRAIN776.vcf.gz LBPSEMA4BRAIN678.vcf.gz LBPSEMA4BRAIN627.vcf.gz LBPSEMA4BRAIN180.vcf.gz LBPSEMA4BRAIN012.vcf.gz LBPSEMA4BRAIN543.vcf.gz LBPSEMA4BRAIN788.vcf.gz LBPSEMA4BRAIN149.vcf.gz LBPSEMA4BRAIN255.vcf.gz LBPSEMA4BRAIN276.vcf.gz LBPSEMA4BRAIN112.vcf.gz LBPSEMA4BRAIN609.vcf.gz LBPSEMA4BRAIN121.vcf.gz LBPSEMA4BRAIN093.vcf.gz LBPSEMA4BRAIN071.vcf.gz LBPSEMA4BRAIN440.vcf.gz LBPSEMA4BRAIN425.vcf.gz LBPSEMA4BRAIN161.vcf.gz LBPSEMA4BRAIN463.vcf.gz LBPSEMA4BRAIN737.vcf.gz LBPSEMA4BRAIN269.vcf.gz LBPSEMA4BRAIN583.vcf.gz LBPSEMA4BRAIN384.vcf.gz LBPSEMA4BRAIN676.vcf.gz LBPSEMA4BRAIN468.vcf.gz LBPSEMA4BRAIN372.vcf.gz LBPSEMA4BRAIN789.vcf.gz LBPSEMA4BRAIN320.vcf.gz LBPSEMA4BRAIN619.vcf.gz LBPSEMA4BRAIN518.vcf.gz LBPSEMA4BRAIN511.vcf.gz LBPSEMA4BRAIN483.vcf.gz LBPSEMA4BRAIN029.vcf.gz LBPSEMA4BRAIN415.vcf.gz LBPSEMA4BRAIN624.vcf.gz LBPSEMA4BRAIN615.vcf.gz LBPSEMA4BRAIN540.vcf.gz LBPSEMA4BRAIN449.vcf.gz LBPSEMA4BRAIN774.vcf.gz LBPSEMA4BRAIN770.vcf.gz LBPSEMA4BRAIN742.vcf.gz LBPSEMA4BRAIN675.vcf.gz LBPSEMA4BRAIN060.vcf.gz LBPSEMA4BRAIN036.vcf.gz LBPSEMA4BRAIN706.vcf.gz LBPSEMA4BRAIN592.vcf.gz LBPSEMA4BRAIN487.vcf.gz LBPSEMA4BRAIN226.vcf.gz LBPSEMA4BRAIN464.vcf.gz LBPSEMA4BRAIN599.vcf.gz LBPSEMA4BRAIN333.vcf.gz LBPSEMA4BRAIN430.vcf.gz LBPSEMA4BRAIN343.vcf.gz LBPSEMA4BRAIN210.vcf.gz LBPSEMA4BRAIN605.vcf.gz LBPSEMA4BRAIN520.vcf.gz LBPSEMA4BRAIN704.vcf.gz LBPSEMA4BRAIN424.vcf.gz LBPSEMA4BRAIN532.vcf.gz LBPSEMA4BRAIN740.vcf.gz LBPSEMA4BRAIN790.vcf.gz LBPSEMA4BRAIN396.vcf.gz LBPSEMA4BRAIN465.vcf.gz LBPSEMA4BRAIN645.vcf.gz LBPSEMA4BRAIN069.vcf.gz LBPSEMA4BRAIN535.vcf.gz LBPSEMA4BRAIN187.vcf.gz LBPSEMA4BRAIN098.vcf.gz LBPSEMA4BRAIN716.vcf.gz LBPSEMA4BRAIN694.vcf.gz LBPSEMA4BRAIN500.vcf.gz LBPSEMA4BRAIN444.vcf.gz LBPSEMA4BRAIN238.vcf.gz LBPSEMA4BRAIN787.vcf.gz LBPSEMA4BRAIN673.vcf.gz LBPSEMA4BRAIN230.vcf.gz LBPSEMA4BRAIN358.vcf.gz LBPSEMA4BRAIN779.vcf.gz LBPSEMA4BRAIN778.vcf.gz LBPSEMA4BRAIN063.vcf.gz LBPSEMA4BRAIN689.vcf.gz LBPSEMA4BRAIN267.vcf.gz LBPSEMA4BRAIN580.vcf.gz LBPSEMA4BRAIN086.vcf.gz LBPSEMA4BRAIN065.vcf.gz LBPSEMA4BRAIN661.vcf.gz LBPSEMA4BRAIN231.vcf.gz LBPSEMA4BRAIN618.vcf.gz LBPSEMA4BRAIN132.vcf.gz LBPSEMA4BRAIN278.vcf.gz LBPSEMA4BRAIN767.vcf.gz LBPSEMA4BRAIN293.vcf.gz LBPSEMA4BRAIN225.vcf.gz LBPSEMA4BRAIN638.vcf.gz LBPSEMA4BRAIN072.vcf.gz LBPSEMA4BRAIN113.vcf.gz LBPSEMA4BRAIN270.vcf.gz LBPSEMA4BRAIN589.vcf.gz LBPSEMA4BRAIN750.vcf.gz LBPSEMA4BRAIN253.vcf.gz LBPSEMA4BRAIN199.vcf.gz LBPSEMA4BRAIN085.vcf.gz LBPSEMA4BRAIN585.vcf.gz LBPSEMA4BRAIN726.vcf.gz LBPSEMA4BRAIN077.vcf.gz LBPSEMA4BRAIN723.vcf.gz LBPSEMA4BRAIN442.vcf.gz LBPSEMA4BRAIN055.vcf.gz LBPSEMA4BRAIN482.vcf.gz LBPSEMA4BRAIN761.vcf.gz LBPSEMA4BRAIN735.vcf.gz LBPSEMA4BRAIN498.vcf.gz LBPSEMA4BRAIN393.vcf.gz LBPSEMA4BRAIN639.vcf.gz LBPSEMA4BRAIN729.vcf.gz LBPSEMA4BRAIN777.vcf.gz LBPSEMA4BRAIN564.vcf.gz LBPSEMA4BRAIN472.vcf.gz LBPSEMA4BRAIN594.vcf.gz LBPSEMA4BRAIN412.vcf.gz LBPSEMA4BRAIN330.vcf.gz LBPSEMA4BRAIN405.vcf.gz LBPSEMA4BRAIN586.vcf.gz LBPSEMA4BRAIN363.vcf.gz LBPSEMA4BRAIN771.vcf.gz LBPSEMA4BRAIN243.vcf.gz LBPSEMA4BRAIN492.vcf.gz LBPSEMA4BRAIN376.vcf.gz LBPSEMA4BRAIN050.vcf.gz LBPSEMA4BRAIN058.vcf.gz LBPSEMA4BRAIN667.vcf.gz LBPSEMA4BRAIN647.vcf.gz LBPSEMA4BRAIN423.vcf.gz LBPSEMA4BRAIN315.vcf.gz LBPSEMA4BRAIN410.vcf.gz LBPSEMA4BRAIN709.vcf.gz LBPSEMA4BRAIN385.vcf.gz LBPSEMA4BRAIN325.vcf.gz LBPSEMA4BRAIN056.vcf.gz LBPSEMA4BRAIN690.vcf.gz LBPSEMA4BRAIN461.vcf.gz LBPSEMA4BRAIN166.vcf.gz LBPSEMA4BRAIN485.vcf.gz LBPSEMA4BRAIN420.vcf.gz LBPSEMA4BRAIN533.vcf.gz LBPSEMA4BRAIN154.vcf.gz LBPSEMA4BRAIN400.vcf.gz LBPSEMA4BRAIN574.vcf.gz LBPSEMA4BRAIN198.vcf.gz LBPSEMA4BRAIN271.vcf.gz LBPSEMA4BRAIN698.vcf.gz LBPSEMA4BRAIN119.vcf.gz LBPSEMA4BRAIN696.vcf.gz LBPSEMA4BRAIN194.vcf.gz LBPSEMA4BRAIN064.vcf.gz LBPSEMA4BRAIN680.vcf.gz LBPSEMA4BRAIN150.vcf.gz LBPSEMA4BRAIN105.vcf.gz LBPSEMA4BRAIN304.vcf.gz LBPSEMA4BRAIN373.vcf.gz LBPSEMA4BRAIN084.vcf.gz LBPSEMA4BRAIN575.vcf.gz LBPSEMA4BRAIN561.vcf.gz LBPSEMA4BRAIN217.vcf.gz LBPSEMA4BRAIN749.vcf.gz LBPSEMA4BRAIN642.vcf.gz LBPSEMA4BRAIN530.vcf.gz LBPSEMA4BRAIN100.vcf.gz LBPSEMA4BRAIN428.vcf.gz LBPSEMA4BRAIN727.vcf.gz LBPSEMA4BRAIN099.vcf.gz LBPSEMA4BRAIN103.vcf.gz LBPSEMA4BRAIN715.vcf.gz LBPSEMA4BRAIN352.vcf.gz LBPSEMA4BRAIN579.vcf.gz LBPSEMA4BRAIN375.vcf.gz LBPSEMA4BRAIN748.vcf.gz LBPSEMA4BRAIN437.vcf.gz LBPSEMA4BRAIN693.vcf.gz LBPSEMA4BRAIN470.vcf.gz LBPSEMA4BRAIN155.vcf.gz LBPSEMA4BRAIN782.vcf.gz LBPSEMA4BRAIN717.vcf.gz LBPSEMA4BRAIN348.vcf.gz LBPSEMA4BRAIN490.vcf.gz LBPSEMA4BRAIN127.vcf.gz LBPSEMA4BRAIN471.vcf.gz LBPSEMA4BRAIN434.vcf.gz LBPSEMA4BRAIN537.vcf.gz LBPSEMA4BRAIN361.vcf.gz LBPSEMA4BRAIN362.vcf.gz LBPSEMA4BRAIN780.vcf.gz LBPSEMA4BRAIN168.vcf.gz LBPSEMA4BRAIN665.vcf.gz LBPSEMA4BRAIN260.vcf.gz LBPSEMA4BRAIN318.vcf.gz LBPSEMA4BRAIN233.vcf.gz LBPSEMA4BRAIN759.vcf.gz LBPSEMA4BRAIN554.vcf.gz LBPSEMA4BRAIN762.vcf.gz LBPSEMA4BRAIN697.vcf.gz LBPSEMA4BRAIN591.vcf.gz LBPSEMA4BRAIN163.vcf.gz LBPSEMA4BRAIN679.vcf.gz LBPSEMA4BRAIN569.vcf.gz LBPSEMA4BRAIN522.vcf.gz LBPSEMA4BRAIN545.vcf.gz LBPSEMA4BRAIN623.vcf.gz LBPSEMA4BRAIN473.vcf.gz LBPSEMA4BRAIN546.vcf.gz LBPSEMA4BRAIN115.vcf.gz LBPSEMA4BRAIN213.vcf.gz LBPSEMA4BRAIN206.vcf.gz LBPSEMA4BRAIN617.vcf.gz LBPSEMA4BRAIN649.vcf.gz LBPSEMA4BRAIN313.vcf.gz LBPSEMA4BRAIN184.vcf.gz LBPSEMA4BRAIN783.vcf.gz LBPSEMA4BRAIN378.vcf.gz LBPSEMA4BRAIN489.vcf.gz LBPSEMA4BRAIN220.vcf.gz LBPSEMA4BRAIN299.vcf.gz LBPSEMA4BRAIN654.vcf.gz | bgzip -c > mergedVariants.vcf.gz
+--------------------------------- END COMMANDS ---------------
+
+    Process appeared to complete without errors. Log is here: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/0a/e441b0343b5a92f5078b2507993c42/.command.log
+
+
+######################################################
+  Process 6: CountObjects
+######################################################
+
+    Working directory: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/f8/ee29f9cab440536081f58a604552db
+    Exit code for process: 0
+    Command run:
+
+--------------------------------- BEGIN COMMANDS -------------
+#!/bin/bash -euo pipefail
+# Write 'params' to CSV, where it can be read in (in R) and used to
+# record SPEAQeasy settings in each RSE's metadata
+echo "[gencode_version_human:25, gencode_version_mouse:M25, ensembl_version_rat:98, anno_build:main, num_reads_infer_strand:2000000, wiggletools_max_threads:10, bam2wig_args:-t 4000000000, bcftools_args:-mvOz, fastqc_args:, feat_counts_gene_args:, feat_counts_exon_args:-O -f, hisat2_args:--phred33 --min-intronlen 20, kallisto_len_mean:200, kallisto_len_sd:30, kallisto_quant_single_args:--single -l 200 -s 30, kallisto_quant_paired_args:, kallisto_quant_ercc_single_args:--single -l 200 -s 30, kallisto_quant_ercc_paired_args:, kallisto_index_args:, salmon_index_args:-k 31, salmon_quant_args:, samtools_args:-q 0 -Q 13 -d 1000000 -AB, star_args:, trim_adapter_args_single:2:30:10, trim_adapter_args_paired:2:30:10:1:TRUE, trim_quality_args:LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:75, regtools_args:-m 20, wigToBigWig_args:-clip, wig-to-big-wig_args:-clip, use_long_paths:false, Rscript:Rscript, hisat2build:hisat2-build, salmon:salmon, kallisto:kallisto, fastqc:fastqc, trimmomatic:trimmomatic-0.39.jar, adapter_fasta_paired:TruSeq3-PE-2.fa, adapter_fasta_single:TruSeq3-SE.fa, hisat2:hisat2, star:STAR, samtools:samtools, featureCounts:featureCounts, feature-counts:featureCounts, regtools:regtools, wigToBigWig:wigToBigWig, wig-to-big-wig:wigToBigWig, wiggletools:wiggletools, bc:bc, bcftools:bcftools, tabix:tabix, bgzip:bgzip, sample:paired, reference:hg38, strand:reverse, strand_mode:declare, annotation:/dcs04/lieber/lcolladotor/annotationFiles_LIBD001/SPEAQeasy/Annotation, input:/dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/, output:/dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/pipeline_output, experiment:living_brain_reanalysis, help:false, coverage:false, custom_anno:, ercc:false, fullCov:false, full-cov:false, keep_unpaired:false, prefix:, qsva:, small_test:false, trim_mode:adaptive, unalign:false, use_salmon:false, use_star:false, reference_type:human, anno_version:25, anno_suffix:hg38_gencode_v25_main, fa_link:ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_25/GRCh38.primary_assembly.genome.fa.gz, gtf_link:ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_25/gencode.v25.annotation.gtf.gz, tx_fa_link:ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_25/gencode.v25.transcripts.fa.gz, commitId:c162a18f63aeda41dc848b1ec61eedb941ac553e, commit-id:c162a18f63aeda41dc848b1ec61eedb941ac553e]" | sed 's|, |\n|g' | tr -d '[]' | sed 's|:|,|' > params.csv
+
+if [[ "" == "" ]]; then
+qsva_arg=""
+else
+qsva_arg="-q $(basename )"
+fi
+
+Rscript create_count_objects.R -o hg38 -e living_brain_reanalysis -p "" -l TRUE -c false -t 2 -s reverse -n false -r false -u /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/pipeline_output -a hg38_gencode_v25_main ${qsva_arg}
+
+cp .command.log counts.log
+--------------------------------- END COMMANDS ---------------
+
+    Process appeared to complete without errors. Log is here: /dcs05/lieber/lcolladotor/living_brain_LIBD001/living_brain_reanalysis/processed-data/02_SPEAQeasy/work/f8/ee29f9cab440536081f58a604552db/.command.log
+
+
+This was the last process submitted for sample LBPSEMA4BRAIN637.

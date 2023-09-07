@@ -1,0 +1,701 @@
+Loading LIBD module for git-status-size/github
+Loading LIBD module for git-lfs/2.8.0
+Loading LIBD module for rmate/1.5.10
+Loading LIBD module for ruby/3.1.2
+Loading conda_R/4.3
+Loading required package: BiocGenerics
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, intersect, is.unsorted, lapply, Map, mapply,
+    match, mget, order, paste, pmax, pmax.int, pmin, pmin.int,
+    Position, rank, rbind, Reduce, rownames, sapply, setdiff, sort,
+    table, tapply, union, unique, unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+Loading required package: stats4
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:utils’:
+
+    findMatches
+
+The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+Loading required package: XVector
+Loading required package: GenomeInfoDb
+
+Attaching package: ‘Biostrings’
+
+The following object is masked from ‘package:base’:
+
+    strsplit
+
+Loading required package: AnnotationDbi
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+Loading required package: rafalib
+Loading required package: usethis
+
+Attaching package: ‘devtools’
+
+The following object is masked from ‘package:rafalib’:
+
+    install_bioc
+
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: ‘matrixStats’
+
+The following objects are masked from ‘package:Biobase’:
+
+    anyMissing, rowMedians
+
+
+Attaching package: ‘MatrixGenerics’
+
+The following objects are masked from ‘package:matrixStats’:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+The following object is masked from ‘package:Biobase’:
+
+    rowMedians
+
+Loading required package: Matrix
+
+Attaching package: ‘Matrix’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+Loading required package: S4Arrays
+Loading required package: abind
+
+Attaching package: ‘S4Arrays’
+
+The following object is masked from ‘package:abind’:
+
+    abind
+
+The following object is masked from ‘package:base’:
+
+    rowsum
+
+
+Attaching package: ‘DelayedArray’
+
+The following objects are masked from ‘package:base’:
+
+    apply, scale, sweep
+
+
+Attaching package: ‘plyr’
+
+The following object is masked from ‘package:matrixStats’:
+
+    count
+
+The following object is masked from ‘package:XVector’:
+
+    compact
+
+The following object is masked from ‘package:IRanges’:
+
+    desc
+
+The following object is masked from ‘package:S4Vectors’:
+
+    rename
+
+
+     Chr  Start    End    exon_gencodeID
+3   chr1  11869  12227 ENSE00002234944.1
+4   chr1  12613  12721 ENSE00003582793.1
+5   chr1  13221  14409 ENSE00002312635.1
+7   chr1  12010  12057 ENSE00001948541.1
+8   chr1  12179  12227 ENSE00001671638.2
+9   chr1  12613  12697 ENSE00001758273.2
+10  chr1  12975  13052 ENSE00001799933.2
+11  chr1  13221  13374 ENSE00001746346.2
+12  chr1  13453  13670 ENSE00001863096.1
+15  chr1  29534  29570 ENSE00001890219.1
+16  chr1  24738  24891 ENSE00003507205.1
+17  chr1  18268  18366 ENSE00003477500.1
+18  chr1  17915  18061 ENSE00003565697.1
+19  chr1  17606  17742 ENSE00003475637.1
+20  chr1  17233  17368 ENSE00003502542.1
+21  chr1  16858  17055 ENSE00003553898.1
+22  chr1  16607  16765 ENSE00003621279.1
+23  chr1  15796  15947 ENSE00002030414.1
+24  chr1  15005  15038 ENSE00001935574.1
+25  chr1  14404  14501 ENSE00001843071.1
+28  chr1  17369  17436 ENSE00003746039.1
+31  chr1  29554  30039 ENSE00001947070.1
+32  chr1  30564  30667 ENSE00001922571.1
+33  chr1  30976  31097 ENSE00001827679.1
+35  chr1  30267  30667 ENSE00001841699.1
+36  chr1  30976  31109 ENSE00001890064.1
+38  chr1  30366  30503 ENSE00003695741.1
+41  chr1  35721  36081 ENSE00001656588.1
+42  chr1  35277  35481 ENSE00001669267.1
+43  chr1  34554  35174 ENSE00001727627.1
+45  chr1  35721  36073 ENSE00001618781.2
+46  chr1  35245  35481 ENSE00001874421.1
+49  chr1  52473  53312 ENSE00003698237.1
+52  chr1  62948  63887 ENSE00001830178.1
+55  chr1  69091  70008 ENSE00002319515.1
+62  chr1 120775 120932 ENSE00001606755.2
+63  chr1 112700 112804 ENSE00001957285.1
+64  chr1  92091  92240 ENSE00001944529.1
+65  chr1  89295  91629 ENSE00001846804.1
+67  chr1 129055 129217 ENSE00001919246.1
+68  chr1 120721 120932 ENSE00001171005.3
+69  chr1 112700 112804 ENSE00001957285.1
+70  chr1  92230  92240 ENSE00001896976.1
+72  chr1 129055 129173 ENSE00001934975.1
+73  chr1 112700 112804 ENSE00001957285.1
+74  chr1 110953 111357 ENSE00001879696.1
+76  chr1 133374 133723 ENSE00003748456.1
+77  chr1 129055 129223 ENSE00003734824.1
+78  chr1 120874 120932 ENSE00003740919.1
+79  chr1 120725 120869 ENSE00003749543.1
+81  chr1 133374 133566 ENSE00001737600.2
+82  chr1 129081 129223 ENSE00001827073.1
+85  chr1  90287  91105 ENSE00001907785.1
+86  chr1  89551  90050 ENSE00001927725.1
+89  chr1 131025 134836 ENSE00001625118.3
+92  chr1 135141 135895 ENSE00001879101.2
+95  chr1 137682 137965 ENSE00001936432.2
+98  chr1 140075 140339 ENSE00001913281.1
+99  chr1 139790 139847 ENSE00001922992.1
+102 chr1 146386 149707 ENSE00001860404.1
+103 chr1 141474 143011 ENSE00001911218.1
+105 chr1 146642 146831 ENSE00001868647.1
+106 chr1 146386 146509 ENSE00001853409.1
+107 chr1 142808 143011 ENSE00001838397.1
+109 chr1 173753 173862 ENSE00001947154.2
+110 chr1 172557 172688 ENSE00001890990.1
+111 chr1 169049 169264 ENSE00001922566.1
+112 chr1 168100 168165 ENSE00001947087.1
+113 chr1 165884 165942 ENSE00001949945.1
+114 chr1 164263 164791 ENSE00001862111.2
+115 chr1 155767 155831 ENSE00001799309.2
+116 chr1 146386 146509 ENSE00001853409.1
+118 chr1 168610 168767 ENSE00001939117.1
+119 chr1 168100 168165 ENSE00001947087.1
+120 chr1 165889 165942 ENSE00001898156.1
+123 chr1 157784 157887 ENSE00001807945.1
+126 chr1 160446 160690 ENSE00001882727.1
+127 chr1 161314 161525 ENSE00001895361.1
+130 chr1 182393 182746 ENSE00003759020.1
+133 chr1 183114 183240 ENSE00003759581.1
+135 chr1 183922 184158 ENSE00003760199.1
+142 chr1 195259 195411 ENSE00003758618.1
+145 chr1 188791 188892 ENSE00003757692.1
+147 chr1 188489 188584 ENSE00003755821.1
+149 chr1 188439 188486 ENSE00003760388.1
+151 chr1 188130 188266 ENSE00003759270.1
+153 chr1 188022 188028 ENSE00003756131.1
+155 chr1 187755 187886 ENSE00003757255.1
+157 chr1 187376 187577 ENSE00003755701.1
+159 chr1 185491 185559 ENSE00003757943.1
+161 chr1 184923 185350 ENSE00003758954.1
+166 chr1 195263 195411 ENSE00003755778.1
+169 chr1 188791 188902 ENSE00003755850.1
+171 chr1 188489 188584 ENSE00003755821.1
+173 chr1 188439 188486 ENSE00003760388.1
+175 chr1 188126 188266 ENSE00003760101.1
+177 chr1 187755 187886 ENSE00003757255.1
+179 chr1 187376 187577 ENSE00003755701.1
+181 chr1 187129 187287 ENSE00003759679.1
+183 chr1 186317 186469 ENSE00003757727.1
+185 chr1 185491 185559 ENSE00003757943.1
+187 chr1 184925 185350 ENSE00003755076.1
+192 chr1 200050 200322 ENSE00003757911.1
+195 chr1 195259 195416 ENSE00003759669.1
+197 chr1 188791 188889 ENSE00003759408.1
+199 chr1 188489 188584 ENSE00003755821.1
+201 chr1 188439 188486 ENSE00003760388.1
+203 chr1 188130 188266 ENSE00003759270.1
+205 chr1 188102 188105 ENSE00003755155.1
+207 chr1 187755 187886 ENSE00003757255.1
+209 chr1 187380 187577 ENSE00003759018.1
+211 chr1 187270 187287 ENSE00003757236.1
+213 chr1 187129 187267 ENSE00003755532.1
+215 chr1 186317 186469 ENSE00003757727.1
+217 chr1 185529 185559 ENSE00003755110.1
+219 chr1 184977 185049 ENSE00003756453.1
+221 chr1 184927 184971 ENSE00003759031.1
+228 chr1 187891 187958 ENSE00003737837.1
+231 chr1 264604 264733 ENSE00001149252.5
+232 chr1 257864 259025 ENSE00001677641.1
+234 chr1 268667 268807 ENSE00001759371.1
+235 chr1 267303 268204 ENSE00001769002.1
+236 chr1 258144 259025 ENSE00001697698.1
+238 chr1 267303 267911 ENSE00003789911.1
+239 chr1 261550 261634 ENSE00003786235.1
+240 chr1 258501 259025 ENSE00003789731.1
+242 chr1 297345 297502 ENSE00001697423.1
+243 chr1 289266 289370 ENSE00001694491.1
+244 chr1 268667 268816 ENSE00001688505.1
+245 chr1 266361 268204 ENSE00001785078.2
+247 chr1 289266 289370 ENSE00001694491.1
+248 chr1 287517 287921 ENSE00001618264.1
+251 chr1 258568 259024 ENSE00001787230.1
+254 chr1 347982 348366 ENSE00001707201.2
+257 chr1 359345 359681 ENSE00001670287.1
+258 chr1 358049 358183 ENSE00001729229.1
+259 chr1 357383 357586 ENSE00001772679.1
+262 chr1 358857 358929 ENSE00001634442.1
+263 chr1 365171 365704 ENSE00001787178.1
+265 chr1 358872 358957 ENSE00001700697.1
+266 chr1 365171 365510 ENSE00001745103.1
+268 chr1 360057 360168 ENSE00003784495.1
+269 chr1 365171 366052 ENSE00003791014.1
+272 chr1 366019 366120 ENSE00001720138.1
+273 chr1 365389 365692 ENSE00001656291.1
+275 chr1 368251 368450 ENSE00001651491.1
+276 chr1 365395 365692 ENSE00001798578.1
+278 chr1 379769 379972 ENSE00001687828.1
+279 chr1 373144 373323 ENSE00001622961.1
+280 chr1 365615 365692 ENSE00001651822.1
+282 chr1 485040 485208 ENSE00001794483.1
+283 chr1 379769 379870 ENSE00001628100.1
+284 chr1 373182 373323 ENSE00001770724.1
+286 chr1 497109 497259 ENSE00003016872.1
+287 chr1 485040 485208 ENSE00001794483.1
+288 chr1 476531 476945 ENSE00001707425.1
+290 chr1 489361 489710 ENSE00003747223.1
+291 chr1 485040 485208 ENSE00001794483.1
+292 chr1 476887 476945 ENSE00003722822.1
+293 chr1 476738 476882 ENSE00003749086.1
+295 chr1 495277 495476 ENSE00002997765.1
+296 chr1 494992 495049 ENSE00003328882.1
+297 chr1 484832 485208 ENSE00001690296.2
+299 chr1 489361 489553 ENSE00001628206.1
+300 chr1 485066 485208 ENSE00001758832.1
+302 chr1 496264 496665 ENSE00001650218.3
+303 chr1 494382 494586 ENSE00001760607.2
+305 chr1 501556 501617 ENSE00003186556.1
+306 chr1 497109 497299 ENSE00003075294.1
+307 chr1 494992 495049 ENSE00003328882.1
+308 chr1 494464 494898 ENSE00003003869.1
+310 chr1 498684 499175 ENSE00001736043.1
+311 chr1 494992 495049 ENSE00003328882.1
+312 chr1 494876 494898 ENSE00001798174.1
+314 chr1 498399 498456 ENSE00001601447.1
+315 chr1 498073 498305 ENSE00001760542.2
+316 chr1 497134 497299 ENSE00003062243.1
+318 chr1 498684 499002 ENSE00003097839.1
+319 chr1 498399 498456 ENSE00001601447.1
+320 chr1 498047 498305 ENSE00003063936.1
+321 chr1 497240 497299 ENSE00003045569.1
+323 chr1 498399 498976 ENSE00003748817.2
+324 chr1 497275 497299 ENSE00003771994.1
+326 chr1 498684 498976 ENSE00003724255.2
+327 chr1 498399 498456 ENSE00001601447.1
+328 chr1 497279 497299 ENSE00003772014.1
+330 chr1 498684 499175 ENSE00001736043.1
+331 chr1 498399 498456 ENSE00001601447.1
+332 chr1 498281 498305 ENSE00001803078.1
+334 chr1 501556 501607 ENSE00003709813.1
+335 chr1 498984 499369 ENSE00003708499.1
+338 chr1 439870 440232 ENSE00003220883.1
+341 chr1 450740 451678 ENSE00002316283.2
+348 chr1 485026 485208 ENSE00001665892.2
+351 chr1 487101 489387 ENSE00001705369.3
+352 chr1 489717 489906 ENSE00003569252.1
+355 chr1 492768 493241 ENSE00002058739.1
+356 chr1 491225 491989 ENSE00002064640.1
+359 chr1 516376 516479 ENSE00003746310.1
+362 chr1 588117 588453 ENSE00001738702.1
+363 chr1 586821 586955 ENSE00001647781.1
+364 chr1 585989 586358 ENSE00001680902.1
+366 chr1 628919 629008 ENSE00003785487.1
+367 chr1 607955 608056 ENSE00001718533.1
+368 chr1 601398 601577 ENSE00003791521.1
+369 chr1 594629 594756 ENSE00003785550.1
+370 chr1 586821 586955 ENSE00001647781.1
+371 chr1 585990 586358 ENSE00003785196.1
+373 chr1 827671 827769 ENSE00003786980.1
+374 chr1 711711 711922 ENSE00001696741.1
+375 chr1 601398 601577 ENSE00003791521.1
+376 chr1 594308 594756 ENSE00003788434.1
+378 chr1 827671 827796 ENSE00003786823.1
+379 chr1 698927 698959 ENSE00003786098.1
+380 chr1 607955 608056 ENSE00001718533.1
+381 chr1 601398 601577 ENSE00003791521.1
+382 chr1 594308 594756 ENSE00003788434.1
+384 chr1 595083 595217 ENSE00001610890.2
+385 chr1 594453 594756 ENSE00001752275.2
+387 chr1 597299 597498 ENSE00001651821.2
+388 chr1 594459 594756 ENSE00001652759.2
+390 chr1 720032 720200 ENSE00001745637.1
+391 chr1 607955 608056 ENSE00001718533.1
+392 chr1 601436 601577 ENSE00001773655.1
+394 chr1 628919 629010 ENSE00001722809.1
+395 chr1 627961 628223 ENSE00001760488.1
+396 chr1 627377 627823 ENSE00001675353.1
+398 chr1 720032 720150 ENSE00001663889.1
+399 chr1 703685 703789 ENSE00001671684.1
+400 chr1 701936 702340 ENSE00001753339.1
+402 chr1 720032 720194 ENSE00001595248.1
+403 chr1 711711 711922 ENSE00001696741.1
+404 chr1 703685 703789 ENSE00001671684.1
+406 chr1 720032 720200 ENSE00001745637.1
+407 chr1 711342 711922 ENSE00001788533.1
+409 chr1 724358 724707 ENSE00003743345.1
+410 chr1 720032 720200 ENSE00001745637.1
+411 chr1 711864 711922 ENSE00003737106.1
+412 chr1 711715 711859 ENSE00003735339.1
+414 chr1 724358 724550 ENSE00001688006.1
+415 chr1 720058 720200 ENSE00001675630.1
+418 chr1 587629 587701 ENSE00001621971.1
+419 chr1 594235 594768 ENSE00001665260.1
+421 chr1 587668 587729 ENSE00001734474.1
+422 chr1 594235 594574 ENSE00001607178.1
+425 chr1 629062 629433 ENSE00001797039.1
+428 chr1 629640 630683 ENSE00001780589.1
+431 chr1 631074 632616 ENSE00001795950.1
+434 chr1 632325 632413 ENSE00003745610.1
+437 chr1 632757 633438 ENSE00001607075.1
+440 chr1 633535 633741 ENSE00001887928.1
+443 chr1 633696 634376 ENSE00002056229.1
+446 chr1 634376 634922 ENSE00001720008.2
+449 chr1 674842 675265 ENSE00003226141.1
+452 chr1 685716 686654 ENSE00002324228.2
+459 chr1 720024 720206 ENSE00003794104.1
+462 chr1 722092 724360 ENSE00001731162.3
+463 chr1 724718 724903 ENSE00003593944.1
+466 chr1 778284 778626 ENSE00001715349.1
+467 chr1 774171 774280 ENSE00001630466.1
+468 chr1 772976 773107 ENSE00001740558.1
+469 chr1 769497 769712 ENSE00001703665.1
+470 chr1 768548 768613 ENSE00001780794.1
+471 chr1 766329 766387 ENSE00001616222.1
+472 chr1 764723 765247 ENSE00001723311.2
+473 chr1 758967 759123 ENSE00001609623.2
+474 chr1 756077 756141 ENSE00003788233.1
+475 chr1 746695 746818 ENSE00001605176.2
+476 chr1 744728 744825 ENSE00003790979.1
+477 chr1 744195 744391 ENSE00003786064.1
+478 chr1 743180 743350 ENSE00001650007.2
+479 chr1 735423 735613 ENSE00003787323.1
+480 chr1 733307 733364 ENSE00003790078.1
+481 chr1 725885 729804 ENSE00002076418.2
+483 chr1 774171 774280 ENSE00001630466.1
+484 chr1 768548 768613 ENSE00001780794.1
+485 chr1 766329 766387 ENSE00001616222.1
+486 chr1 765144 765247 ENSE00003791464.1
+487 chr1 764723 764800 ENSE00001674071.2
+490 chr1 758233 758336 ENSE00001807223.1
+493 chr1 760911 761154 ENSE00001695448.1
+494 chr1 761778 761989 ENSE00001761034.1
+497 chr1 778770 779092 ENSE00003705302.1
+498 chr1 781937 782136 ENSE00001741526.2
+499 chr1 784370 784690 ENSE00001596490.1
+501 chr1 778782 779092 ENSE00001719955.1
+502 chr1 781937 782191 ENSE00001642276.1
+504 chr1 778930 779092 ENSE00002824115.1
+505 chr1 781937 782043 ENSE00002920037.1
+506 chr1 783111 783363 ENSE00002767185.1
+507 chr1 784370 784655 ENSE00002968432.1
+509 chr1 778937 779092 ENSE00003708104.1
+510 chr1 781937 782136 ENSE00001741526.2
+511 chr1 783111 783363 ENSE00002767185.1
+512 chr1 784370 784429 ENSE00003711221.1
+514 chr1 779056 779092 ENSE00001610263.1
+515 chr1 803919 804222 ENSE00001706796.1
+516 chr1 804776 804875 ENSE00001669825.1
+518 chr1 784370 784759 ENSE00002849436.1
+520 chr1 784370 784977 ENSE00002792640.1
+522 chr1 784370 784493 ENSE00002806114.1
+523 chr1 786393 786866 ENSE00002830575.1
+525 chr1 784370 784493 ENSE00002806114.1
+526 chr1 795470 795513 ENSE00002897844.1
+528 chr1 784370 784493 ENSE00002806114.1
+529 chr1 801607 801876 ENSE00002861078.1
+531 chr1 784370 784493 ENSE00002806114.1
+532 chr1 792882 793041 ENSE00002906328.1
+533 chr1 795470 795582 ENSE00002897294.1
+534 chr1 803951 804222 ENSE00002781548.1
+535 chr1 804776 804832 ENSE00002930618.1
+537 chr1 784370 784493 ENSE00002806114.1
+538 chr1 803919 804222 ENSE00001706796.1
+539 chr1 804776 805127 ENSE00002850432.1
+541 chr1 784370 784493 ENSE00002806114.1
+542 chr1 803567 803667 ENSE00002817360.1
+543 chr1 803919 804222 ENSE00001706796.1
+544 chr1 804776 805270 ENSE00002739987.1
+546 chr1 784370 784493 ENSE00002806114.1
+547 chr1 803919 804222 ENSE00001706796.1
+548 chr1 804776 804966 ENSE00002904472.1
+549 chr1 806386 806459 ENSE00002772343.1
+551 chr1 784370 784493 ENSE00002806114.1
+552 chr1 803922 804222 ENSE00002766583.1
+553 chr1 804776 804966 ENSE00002904472.1
+554 chr1 807217 807314 ENSE00002894550.1
+556 chr1 784370 784493 ENSE00002806114.1
+557 chr1 803919 804222 ENSE00001706796.1
+558 chr1 807217 807323 ENSE00001787632.1
+559 chr1 809658 809729 ENSE00002883887.1
+561 chr1 784396 784493 ENSE00002975428.1
+562 chr1 792882 793041 ENSE00002906328.1
+563 chr1 795470 795582 ENSE00002897294.1
+564 chr1 803567 803667 ENSE00002817360.1
+565 chr1 803951 804222 ENSE00002781548.1
+566 chr1 804776 804966 ENSE00002904472.1
+567 chr1 807217 807321 ENSE00002877855.1
+569 chr1 785800 787672 ENSE00002846108.1
+571 chr1 804799 804966 ENSE00001776151.1
+572 chr1 807217 807465 ENSE00001657688.1
+574 chr1 804932 804966 ENSE00001730958.1
+575 chr1 807217 807323 ENSE00001787632.1
+576 chr1 809622 810060 ENSE00001615350.1
+579 chr1 817373 817712 ENSE00001746491.1
+580 chr1 810067 810170 ENSE00001674926.2
+581 chr1 808574 808623 ENSE00001782999.1
+582 chr1 805799 805891 ENSE00001640641.1
+583 chr1 800879 801163 ENSE00001716345.1
+585 chr1 810067 810161 ENSE00001651951.1
+586 chr1 808574 808623 ENSE00001782999.1
+587 chr1 805799 805891 ENSE00001640641.1
+590 chr1 817371 818202 ENSE00001249411.1
+591 chr1 818723 819837 ENSE00001711564.2
+594 chr1 825138 825552 ENSE00003756803.1
+595 chr1 847654 847806 ENSE00001688192.1
+596 chr1 849484 849592 ENSE00003757918.1
+598 chr1 826832 826923 ENSE00003757733.1
+599 chr1 829003 829104 ENSE00001656290.1
+600 chr1 851927 852225 ENSE00003758792.1
+602 chr1 827608 827775 ENSE00001768150.1
+603 chr1 829003 829104 ENSE00001656290.1
+604 chr1 851927 852110 ENSE00001678509.1
+605 chr1 852671 852766 ENSE00001778823.1
+606 chr1 853391 859446 ENSE00001617947.2
+608 chr1 827657 827775 ENSE00003756073.1
+609 chr1 829003 829104 ENSE00001656290.1
+610 chr1 847654 847806 ENSE00001688192.1
+611 chr1 850181 850351 ENSE00003707413.1
+612 chr1 851927 852014 ENSE00003759341.1
+614 chr1 827661 827775 ENSE00003703791.1
+615 chr1 829003 829104 ENSE00001656290.1
+616 chr1 847654 847806 ENSE00001688192.1
+617 chr1 849484 849602 ENSE00003702545.1
+618 chr1 851927 851987 ENSE00003704746.1
+620 chr1 827661 827775 ENSE00003703791.1
+ [ reached 'max' / getOption("max.print") -- omitted 1182390 rows ]
+'select()' returned 1:many mapping between keys and columns
+..................................................................................................................................................................................................................................................................
+..................................................................................................................................................................................................................................................................
+'select()' returned 1:many mapping between keys and columns
+Joining by: Chr, Start, End
+..................................................................................................................................................................................................................................................................
+..................................................................................................................................................................................................................................................................
+2023-09-06 21:18:19.900626 reading in data
+2023-09-06 21:20:45.710852 creating master table of junctions
+2023-09-06 21:22:03.477838 there are 44046869 total junctions
+2023-09-06 21:22:03.478359 populating count matrix
+2023-09-06 21:43:51.422391 filling in the count matrix
+....................[1] "Reproducibility information:"
+[1] "2023-09-06 22:22:17 EDT"
+    user   system  elapsed 
+7230.151 1165.381 6793.968 
+─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────
+ setting  value
+ version  R version 4.3.1 Patched (2023-09-05 r85080)
+ os       CentOS Linux 7 (Core)
+ system   x86_64, linux-gnu
+ ui       X11
+ language (EN)
+ collate  en_US.UTF-8
+ ctype    en_US.UTF-8
+ tz       US/Eastern
+ date     2023-09-06
+ pandoc   3.1.1 @ /jhpce/shared/jhpce/core/conda/miniconda3-4.11.0/envs/svnR-4.3/bin/ (via rmarkdown)
+
+─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+ package              * version   date (UTC) lib source
+ abind                * 1.4-5     2016-07-21 [2] CRAN (R 4.3.0)
+ AnnotationDbi        * 1.62.2    2023-07-02 [2] Bioconductor
+ backports              1.4.1     2021-12-13 [2] CRAN (R 4.3.0)
+ base64enc              0.1-3     2015-07-28 [2] CRAN (R 4.3.0)
+ Biobase              * 2.60.0    2023-04-25 [2] Bioconductor
+ BiocFileCache          2.8.0     2023-04-25 [2] Bioconductor
+ BiocGenerics         * 0.46.0    2023-04-25 [2] Bioconductor
+ BiocIO                 1.10.0    2023-04-25 [2] Bioconductor
+ BiocParallel         * 1.34.2    2023-05-22 [2] Bioconductor
+ biomaRt                2.56.1    2023-06-09 [2] Bioconductor
+ Biostrings           * 2.68.1    2023-05-16 [2] Bioconductor
+ bit                    4.0.5     2022-11-15 [2] CRAN (R 4.3.0)
+ bit64                  4.0.5     2020-08-30 [2] CRAN (R 4.3.0)
+ bitops                 1.0-7     2021-04-24 [2] CRAN (R 4.3.0)
+ blob                   1.2.4     2023-03-17 [2] CRAN (R 4.3.0)
+ BSgenome               1.68.0    2023-04-25 [2] Bioconductor
+ bumphunter             1.42.0    2023-04-25 [2] Bioconductor
+ cachem                 1.0.8     2023-05-01 [2] CRAN (R 4.3.0)
+ callr                  3.7.3     2022-11-02 [2] CRAN (R 4.3.0)
+ checkmate              2.2.0     2023-04-27 [2] CRAN (R 4.3.0)
+ cli                    3.6.1     2023-03-23 [2] CRAN (R 4.3.0)
+ cluster                2.1.4     2022-08-22 [3] CRAN (R 4.3.1)
+ codetools              0.2-19    2023-02-01 [3] CRAN (R 4.3.1)
+ colorspace             2.1-0     2023-01-23 [2] CRAN (R 4.3.0)
+ crayon                 1.5.2     2022-09-29 [2] CRAN (R 4.3.0)
+ curl                   5.0.2     2023-08-14 [2] CRAN (R 4.3.1)
+ data.table             1.14.8    2023-02-17 [2] CRAN (R 4.3.0)
+ DBI                    1.1.3     2022-06-18 [2] CRAN (R 4.3.0)
+ dbplyr                 2.3.3     2023-07-07 [2] CRAN (R 4.3.1)
+ DelayedArray         * 0.26.7    2023-07-28 [2] Bioconductor
+ derfinder            * 1.34.0    2023-04-25 [2] Bioconductor
+ derfinderHelper        1.34.0    2023-04-25 [2] Bioconductor
+ devtools             * 2.4.5     2022-10-11 [2] CRAN (R 4.3.0)
+ digest                 0.6.33    2023-07-07 [2] CRAN (R 4.3.1)
+ doRNG                  1.8.6     2023-01-16 [2] CRAN (R 4.3.0)
+ dplyr                  1.1.3     2023-09-03 [2] CRAN (R 4.3.1)
+ ellipsis               0.3.2     2021-04-29 [2] CRAN (R 4.3.0)
+ evaluate               0.21      2023-05-05 [1] CRAN (R 4.3.0)
+ fansi                  1.0.4     2023-01-22 [2] CRAN (R 4.3.0)
+ fastmap                1.1.1     2023-02-24 [2] CRAN (R 4.3.0)
+ filelock               1.0.2     2018-10-05 [2] CRAN (R 4.3.0)
+ foreach                1.5.2     2022-02-02 [2] CRAN (R 4.3.0)
+ foreign                0.8-84    2022-12-06 [3] CRAN (R 4.3.1)
+ Formula                1.2-5     2023-02-24 [2] CRAN (R 4.3.0)
+ fs                     1.6.3     2023-07-20 [2] CRAN (R 4.3.1)
+ gargle                 1.5.2     2023-07-20 [2] CRAN (R 4.3.1)
+ generics               0.1.3     2022-07-05 [2] CRAN (R 4.3.0)
+ GenomeInfoDb         * 1.36.2    2023-08-25 [2] Bioconductor
+ GenomeInfoDbData       1.2.10    2023-04-11 [2] Bioconductor
+ GenomicAlignments      1.36.0    2023-04-25 [2] Bioconductor
+ GenomicFeatures      * 1.52.2    2023-08-25 [2] Bioconductor
+ GenomicFiles           1.36.0    2023-04-25 [2] Bioconductor
+ GenomicRanges        * 1.52.0    2023-04-25 [2] Bioconductor
+ getopt               * 1.20.3    2019-03-22 [1] CRAN (R 4.3.0)
+ ggplot2                3.4.3     2023-08-14 [2] CRAN (R 4.3.1)
+ glue                   1.6.2     2022-02-24 [2] CRAN (R 4.3.0)
+ googledrive            2.1.1     2023-06-11 [2] CRAN (R 4.3.1)
+ gridExtra              2.3       2017-09-09 [2] CRAN (R 4.3.0)
+ gtable                 0.3.4     2023-08-21 [2] CRAN (R 4.3.1)
+ Hmisc                  5.1-0     2023-05-08 [2] CRAN (R 4.3.0)
+ hms                    1.1.3     2023-03-21 [2] CRAN (R 4.3.0)
+ htmlTable              2.4.1     2022-07-07 [2] CRAN (R 4.3.0)
+ htmltools              0.5.6     2023-08-10 [2] CRAN (R 4.3.1)
+ htmlwidgets            1.6.2     2023-03-17 [2] CRAN (R 4.3.0)
+ httpuv                 1.6.11    2023-05-11 [2] CRAN (R 4.3.0)
+ httr                   1.4.7     2023-08-15 [2] CRAN (R 4.3.1)
+ IRanges              * 2.34.1    2023-06-22 [2] Bioconductor
+ iterators              1.0.14    2022-02-05 [2] CRAN (R 4.3.0)
+ jaffelab             * 0.99.32   2023-05-06 [1] Github (LieberInstitute/jaffelab@7b7afe3)
+ KEGGREST               1.40.0    2023-04-25 [2] Bioconductor
+ knitr                  1.43      2023-05-25 [2] CRAN (R 4.3.0)
+ later                  1.3.1     2023-05-02 [2] CRAN (R 4.3.0)
+ lattice                0.21-8    2023-04-05 [3] CRAN (R 4.3.1)
+ lifecycle              1.0.3     2022-10-07 [2] CRAN (R 4.3.0)
+ limma                  3.56.2    2023-06-04 [2] Bioconductor
+ locfit                 1.5-9.8   2023-06-11 [2] CRAN (R 4.3.1)
+ magrittr               2.0.3     2022-03-30 [2] CRAN (R 4.3.0)
+ MASS                   7.3-60    2023-05-04 [3] CRAN (R 4.3.1)
+ Matrix               * 1.6-1     2023-08-14 [3] CRAN (R 4.3.1)
+ MatrixGenerics       * 1.12.3    2023-07-30 [2] Bioconductor
+ matrixStats          * 1.0.0     2023-06-02 [2] CRAN (R 4.3.0)
+ memoise                2.0.1     2021-11-26 [2] CRAN (R 4.3.0)
+ mime                   0.12      2021-09-28 [2] CRAN (R 4.3.0)
+ miniUI                 0.1.1.1   2018-05-18 [2] CRAN (R 4.3.0)
+ munsell                0.5.0     2018-06-12 [2] CRAN (R 4.3.0)
+ nlme                   3.1-163   2023-08-09 [3] CRAN (R 4.3.1)
+ nnet                   7.3-19    2023-05-03 [3] CRAN (R 4.3.1)
+ org.Hs.eg.db         * 3.17.0    2023-04-11 [2] Bioconductor
+ pillar                 1.9.0     2023-03-22 [2] CRAN (R 4.3.0)
+ pkgbuild               1.4.2     2023-06-26 [2] CRAN (R 4.3.1)
+ pkgconfig              2.0.3     2019-09-22 [2] CRAN (R 4.3.0)
+ pkgload                1.3.2.1   2023-07-08 [2] CRAN (R 4.3.1)
+ plyr                 * 1.8.8     2022-11-11 [2] CRAN (R 4.3.0)
+ png                    0.1-8     2022-11-29 [2] CRAN (R 4.3.0)
+ prettyunits            1.1.1     2020-01-24 [2] CRAN (R 4.3.0)
+ processx               3.8.2     2023-06-30 [2] CRAN (R 4.3.1)
+ profvis                0.3.8     2023-05-02 [2] CRAN (R 4.3.0)
+ progress               1.2.2     2019-05-16 [2] CRAN (R 4.3.0)
+ promises               1.2.1     2023-08-10 [2] CRAN (R 4.3.1)
+ ps                     1.7.5     2023-04-18 [2] CRAN (R 4.3.0)
+ purrr                  1.0.2     2023-08-10 [2] CRAN (R 4.3.1)
+ qvalue                 2.32.0    2023-04-25 [2] Bioconductor
+ R6                     2.5.1     2021-08-19 [2] CRAN (R 4.3.0)
+ rafalib              * 1.0.0     2015-08-09 [1] CRAN (R 4.3.0)
+ rappdirs               0.3.3     2021-01-31 [2] CRAN (R 4.3.0)
+ RColorBrewer           1.1-3     2022-04-03 [2] CRAN (R 4.3.0)
+ Rcpp                   1.0.11    2023-07-06 [2] CRAN (R 4.3.1)
+ RCurl                  1.98-1.12 2023-03-27 [2] CRAN (R 4.3.0)
+ remotes                2.4.2.1   2023-07-18 [2] CRAN (R 4.3.1)
+ reshape2               1.4.4     2020-04-09 [2] CRAN (R 4.3.0)
+ restfulr               0.0.15    2022-06-16 [2] CRAN (R 4.3.0)
+ rjson                  0.2.21    2022-01-09 [2] CRAN (R 4.3.0)
+ rlang                  1.1.1     2023-04-28 [2] CRAN (R 4.3.0)
+ rmarkdown              2.24      2023-08-14 [2] CRAN (R 4.3.1)
+ rngtools               1.5.2     2021-09-20 [2] CRAN (R 4.3.0)
+ rpart                  4.1.19    2022-10-21 [3] CRAN (R 4.3.1)
+ Rsamtools              2.16.0    2023-04-25 [2] Bioconductor
+ RSQLite                2.3.1     2023-04-03 [2] CRAN (R 4.3.0)
+ rstudioapi             0.15.0    2023-07-07 [2] CRAN (R 4.3.1)
+ rtracklayer          * 1.60.1    2023-08-15 [2] Bioconductor
+ S4Arrays             * 1.0.6     2023-08-30 [2] Bioconductor
+ S4Vectors            * 0.38.1    2023-05-02 [2] Bioconductor
+ scales                 1.2.1     2022-08-20 [2] CRAN (R 4.3.0)
+ segmented              1.6-4     2023-04-13 [1] CRAN (R 4.3.0)
+ sessioninfo            1.2.2     2021-12-06 [2] CRAN (R 4.3.0)
+ shiny                  1.7.5     2023-08-12 [2] CRAN (R 4.3.1)
+ stringi                1.7.12    2023-01-11 [2] CRAN (R 4.3.0)
+ stringr                1.5.0     2022-12-02 [2] CRAN (R 4.3.0)
+ SummarizedExperiment * 1.30.2    2023-06-06 [2] Bioconductor
+ tibble                 3.2.1     2023-03-20 [2] CRAN (R 4.3.0)
+ tidyselect             1.2.0     2022-10-10 [2] CRAN (R 4.3.0)
+ urlchecker             1.0.1     2021-11-30 [2] CRAN (R 4.3.0)
+ usethis              * 2.2.2     2023-07-06 [2] CRAN (R 4.3.1)
+ utf8                   1.2.3     2023-01-31 [2] CRAN (R 4.3.0)
+ VariantAnnotation      1.46.0    2023-04-25 [2] Bioconductor
+ vctrs                  0.6.3     2023-06-14 [2] CRAN (R 4.3.1)
+ xfun                   0.40      2023-08-09 [2] CRAN (R 4.3.1)
+ XML                    3.99-0.14 2023-03-19 [2] CRAN (R 4.3.0)
+ xml2                   1.3.5     2023-07-06 [2] CRAN (R 4.3.1)
+ xtable                 1.8-4     2019-04-21 [2] CRAN (R 4.3.0)
+ XVector              * 0.40.0    2023-04-25 [2] Bioconductor
+ yaml                   2.3.7     2023-01-23 [2] CRAN (R 4.3.0)
+ zlibbioc               1.46.0    2023-04-25 [2] Bioconductor
+
+ [1] /users/lcollado/R/4.3
+ [2] /jhpce/shared/jhpce/core/conda/miniconda3-4.11.0/envs/svnR-4.3/R/4.3/lib64/R/site-library
+ [3] /jhpce/shared/jhpce/core/conda/miniconda3-4.11.0/envs/svnR-4.3/R/4.3/lib64/R/library
+
+──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
