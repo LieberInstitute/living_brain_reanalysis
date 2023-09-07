@@ -25,36 +25,24 @@ res <-
 res <- res[order(res$P.Value), ]
 colnames(res)[c(1, 8)] <- c("ensembl_id", "de_status")
 
-### get monorail data for qc
-options(recount3_url = "https://neuro-recount-ds.s3.amazonaws.com/recount3")
-hp <- available_projects()
-rse_gene <- create_rse(hp[hp$project == "LBP", ])
-seqlevels(rse_gene, pruning.mode = "coarse") <- paste0("chr", c(1:22, "X", "Y", "M"))
-assay(rse_gene, "counts") <- transform_counts(rse_gene)
-assay(rse_gene, "raw_counts") <- NULL # drop raw counts
-
-## allow line up
-rowData(rse_gene)$ensembl_id <- ss(rownames(rse_gene), "\\.")
+## Load SPEAQeasy gene level data
+rse_gene <- readRDS(here("processed-data", "02_SPEAQeasy", "rse_gene_living_brain_reanalysis_n516.Rds"))
+rowData(rse_gene)$ensembl_id <- rowData(rse_gene)$ensemblID
 
 ## phenotype data
-colnames(colData(rse_gene)) <- gsub("synapse.", "", colnames(colData(rse_gene)))
-colnames(colData(rse_gene)) <- gsub("%", "perc", colnames(colData(rse_gene)),
-    fixed =
-        TRUE
-)
-pheno <- read.csv("phenotype/LBP_merged_phenotype.csv")
-rse_gene$COI <- factor(pheno$COI[match(colnames(rse_gene), pheno$specimenID)])
+rse_gene$COI <- factor(ifelse(rse_gene$isPostMortem, "PM", "LIV"))
+rse_gene$postmortem <- as.numeric(rse_gene$COI) - 1
 
 ## add cell comp PCs
-cellProps <- read.csv("phenotype/LBP_burkeDecon.csv", row.names = 1)
+cellProps <- read.csv(file.path(dir_rdata, "LBP_burkeDecon.csv"), row.names = 1)
 cellProps <- cellProps[colnames(rse_gene), ]
 cellPca <- prcomp(cellProps)
 getPcaVars(cellPca)[1:2]
-#  84.10  9.29
+# [1] 79.0 11.1
 rse_gene$cellPC <- cellPca$x[, 1]
 
 write.csv(as.data.frame(colData(rse_gene)),
-    file = "phenotype/LBP_merged_seqmetrics.csv",
+    file = file.path(dir_rdata, "LBP_merged_seqmetrics.csv"),
     row.names = FALSE
 )
 
