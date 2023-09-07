@@ -99,7 +99,7 @@ ccPcaMetrics[1:3, nn]
 gIndexes <- splitit(rse_gene$COI)
 
 ##  each variable vs COI
-pdf(file.path(dir_plots, "Vars_vs_coi.pdf"))
+pdf(file.path(dir_plots, "Vars_vs_COI.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 2,
