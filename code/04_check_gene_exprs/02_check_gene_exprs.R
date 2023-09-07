@@ -1,8 +1,18 @@
-##
-library(recount3)
-library(readxl)
-library(jaffelab)
-library(edgeR)
+library("here")
+library("SummarizedExperiment")
+library("readxl")
+library("jaffelab")
+library("edgeR")
+library("sessioninfo")
+
+## For reproducing the jitter output
+set.seed(20230907)
+
+## Create output directories
+dir_plots <- here("plots", "04_check_gene_exprs")
+dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
+dir_rdata <- here("processed-data", "04_check_gene_exprs")
+dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
 ## published results
 res <- read_excel("DONE_LEL2023_LBP_FLAGSHIP_SCIENCE_ST1.xlsx", sheet = 2)
@@ -315,3 +325,10 @@ plot(
     bg = "grey"
 )
 cor.test(outGene_qsva_pm$logFC[outGene_pm$isExprs], outGene_qsva_liv$logFC[outGene_pm$isExprs])
+
+## Reproducibility information
+print("Reproducibility information:")
+Sys.time()
+proc.time()
+options(width = 120)
+sessioninfo::session_info()
