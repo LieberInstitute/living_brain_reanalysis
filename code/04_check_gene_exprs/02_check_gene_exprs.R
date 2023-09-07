@@ -64,15 +64,6 @@ pca <- prcomp(t(log_rpkm))
 # use their genes for FDR calc
 eIndex <- which(rowData(rse_gene)$ensembl_id %in% res$ensembl_id)
 
-## covs
-rse_gene$race[rse_gene$race == "White "] <- "White"
-rse_gene$race[rse_gene$race == ""] <- "Unknown"
-rse_gene$diagnosis[rse_gene$diagnosis == "Parkinson's disease "] <- "Parkinson's disease"
-rse_gene$samplingage[rse_gene$samplingage == "89+"] <- 89
-rse_gene$samplingage <- as.numeric(rse_gene$samplingage)
-rse_gene$diagnosis <- factor(rse_gene$diagnosis)
-rse_gene$diagnosis <- relevel(rse_gene$diagnosis, "control")
-
 ## model
 mod <- model.matrix(
     ~ COI + race + sex + diagnosis +
