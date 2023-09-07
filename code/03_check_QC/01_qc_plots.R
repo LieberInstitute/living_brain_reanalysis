@@ -72,6 +72,7 @@ rowData(rse_gene)$ensembl_id <- rowData(rse_gene)$ensemblID
 ## phenotype data
 rse_gene$COI <- factor(ifelse(rse_gene$isPostMortem, "PM", "LIV"))
 rse_gene$postmortem <- as.numeric(rse_gene$COI) - 1
+rse_gene$totalAssignedNotGene <- 1 - rse_gene$totalAssignedGene
 
 ### do PCA
 dge <- DGEList(
@@ -94,7 +95,11 @@ vars <-
 vars <- vars[!grepl("ageDeath_num.individual|_R2|_R1|readLength|postmortem", vars)]
 ccPcaMetrics <-
     cor(pca$x[, 1:10], as.data.frame(colData(rse_gene)[, vars]), use = "complete.obs")
-nn <- c("totalAssignedGene")
+nn <- c("totalAssignedNotGene", "totalAssignedGene")
+#     totalAssignedNotGene totalAssignedGene
+# PC1            0.1949845        -0.1949845
+# PC2            0.1356183        -0.1356183
+# PC3            0.5002587        -0.5002587
 ccPcaMetrics[1:3, nn]
 gIndexes <- splitit(rse_gene$COI)
 
