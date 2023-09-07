@@ -4,7 +4,6 @@ library("edgeR")
 library("here")
 library("sessioninfo")
 
-
 pcHeatmap <-
     function(rse,
     pca,
@@ -12,8 +11,8 @@ pcHeatmap <-
     pthresh = 10,
     width = 12,
     height = 14) {
-        library(RColorBrewer)
-        library(lattice)
+        library("RColorBrewer")
+        library("lattice")
         n <- min(10, ncol(pca$x))
         vars <- colnames(colData(rse))[sapply(colData(rse), class) ==
             "numeric"]
@@ -24,8 +23,6 @@ pcHeatmap <-
         tPcaMetrics <-
             ccPcaMetrics / sqrt((1 - ccPcaMetrics^2) / (ncol(rse) - 2))
         pvalPcaMetrics <- 2 * pt(-abs(tPcaMetrics), df = ncol(rse) - 1)
-        colnames(pvalPcaMetrics) <-
-            gsub("recount_qc.", "", colnames(pvalPcaMetrics), fixed = TRUE)
         filepath <- file.path(plotdir, "pcs_vs_metrics_heatmap.pdf")
         filepath <- gsub("//", "/", filepath)
         pdf(filepath, w = width, h = height)
@@ -52,6 +49,9 @@ pcHeatmap <-
         dev.off()
     }
 
+## Create output directory for plots
+dir_plots <- here("plots", "03_check_QC")
+dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
 
 ## published results
 res <-
@@ -69,14 +69,7 @@ rse_gene <- readRDS(here("processed-data", "02_SPEAQeasy", "rse_gene_living_brai
 rowData(rse_gene)$ensembl_id <- rowData(rse_gene)$ensemblID
 
 ## phenotype data
-colnames(colData(rse_gene)) <-
-    gsub("synapse.", "", colnames(colData(rse_gene)))
-colnames(colData(rse_gene)) <-
-    gsub("%", "perc", colnames(colData(rse_gene)), fixed = TRUE)
-pheno <- read.csv("phenotype/LBP_merged_phenotype.csv")
-
-rse_gene$COI <-
-    factor(pheno$COI[match(colnames(rse_gene), pheno$specimenID)])
+rse_gene$COI <- factor(ifelse(rse_gene$isPostMortem, "PM", "LIV"))
 rse_gene$postmortem <- as.numeric(rse_gene$COI) - 1
 
 ### do PCA
@@ -92,7 +85,7 @@ log_rpkm <-
 pca <- prcomp(t(log_rpkm))
 pcaVars <- getPcaVars(pca)
 
-pcHeatmap(rse_gene, pca, plotdir = "plots", pthresh = 20)
+pcHeatmap(rse_gene, pca, plotdir = dir_plots, pthresh = 20)
 
 ###### example plots
 vars <-
