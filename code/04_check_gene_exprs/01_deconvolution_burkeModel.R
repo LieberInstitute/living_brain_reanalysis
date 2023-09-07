@@ -1,7 +1,9 @@
-library(readxl)
-library(recount3)
-library(jaffelab)
-library(RColorBrewer)
+library("readxl")
+library("jaffelab")
+library("RColorBrewer")
+library("here")
+library("SummarizedExperiment")
+library("sessioninfo")
 
 ## read in decon
 decon_df <- read_excel("decon_model.xlsx", sheet = 1, skip = 3)
@@ -65,3 +67,10 @@ for (i in 1:ncol(propEsts_scaled)) {
     legend(lc, paste0("p=", signif(tt[4], 3)), cex = 1.5)
 }
 dev.off()
+
+## Reproducibility information
+print("Reproducibility information:")
+Sys.time()
+proc.time()
+options(width = 120)
+sessioninfo::session_info()
