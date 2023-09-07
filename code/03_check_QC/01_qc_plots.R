@@ -149,7 +149,7 @@ points(pca$x[, 1] ~ jitter(as.numeric(rse_gene$COI), amount = 0.15),
 )
 dev.off()
 
-pdf("plots/PC1_vs_intron.pdf")
+pdf(file.path(dir_plots, "PC1_vs_totalAssignedGene.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 1.7,
@@ -158,7 +158,7 @@ par(
 palette(brewer.pal(4, "Dark2"))
 plot(
     pca$x[, 1] ~ colData(rse_gene)[, nn[1]],
-    xlab = gsub("recount_qc.", "", nn[1], fixed = TRUE),
+    xlab = nn[1],
     ylab = paste0("PC1: ", pcaVars[1], "% Var Expl"),
     pch = 21,
     bg = rse_gene$COI
