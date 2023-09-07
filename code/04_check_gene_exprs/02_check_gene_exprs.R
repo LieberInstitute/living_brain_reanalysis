@@ -15,7 +15,13 @@ dir_rdata <- here("processed-data", "04_check_gene_exprs")
 dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
 ## published results
-res <- read_excel("DONE_LEL2023_LBP_FLAGSHIP_SCIENCE_ST1.xlsx", sheet = 2)
+res <-
+    read_excel(here(
+        "raw-data",
+        "LBP",
+        "DONE_LEL2023_LBP_FLAGSHIP_SCIENCE_ST1.xlsx"
+    ),
+        sheet = 2)
 res <- res[order(res$P.Value), ]
 colnames(res)[c(1, 8)] <- c("ensembl_id", "de_status")
 
