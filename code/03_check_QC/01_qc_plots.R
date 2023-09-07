@@ -220,6 +220,27 @@ for (i in seq(along = gIndexes)) {
 
 dev.off()
 
+
+pdf(file.path(dir_plots, "PC2_vs_COI.pdf"))
+par(
+    mar = c(4, 6, 2, 2),
+    cex.axis = 1.7,
+    cex.lab = 1.7
+)
+palette(brewer.pal(4, "Dark2"))
+boxplot(
+    pca$x[, 2] ~ rse_gene$COI,
+    xlab = "",
+    ylab = paste0("PC2: ", pcaVars[2], "% Var Expl"),
+    ylim = range(pca$x[, 2]),
+    outline = FALSE
+)
+points(pca$x[, 2] ~ jitter(as.numeric(rse_gene$COI), amount = 0.15),
+    pch = 21,
+    bg = rse_gene$COI
+)
+dev.off()
+
 ### PC3
 pdf("plots/PC3_vs_COI.pdf")
 par(
