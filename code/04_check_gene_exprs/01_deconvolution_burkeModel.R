@@ -3,42 +3,50 @@ library("jaffelab")
 library("RColorBrewer")
 library("here")
 library("SummarizedExperiment")
+library("edgeR")
+library("minfi")
 library("sessioninfo")
 
+## For reproducing the jitter output
+set.seed(20230907)
+
+## Create output directories
+dir_plots <- here("plots", "04_check_gene_exprs")
+dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
+dir_rdata <- here("processed-data", "04_check_gene_exprs")
+dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
+
 ## read in decon
-decon_df <- read_excel("decon_model.xlsx", sheet = 1, skip = 3)
+decon_df <- read_excel(here("raw-data", "Burke", "decon_model.xlsx"), sheet = 1, skip = 3)
 colnames(decon_df)[3] <- "CellType"
 
 ## make matrix
 coefEsts <- as.matrix(decon_df[, 4:13])
 rownames(coefEsts) <- ss(decon_df$Gene, "\\.")
 
-### get monorail data for qc
-options(recount3_url = "https://neuro-recount-ds.s3.amazonaws.com/recount3")
-hp <- available_projects()
-rse_gene <- create_rse(hp[hp$project == "LBP", ])
-seqlevels(rse_gene, pruning.mode = "coarse") <- paste0("chr", c(1:22, "X", "Y", "M"))
-assay(rse_gene, "counts") <- transform_counts(rse_gene)
-assay(rse_gene, "raw_counts") <- NULL # drop raw counts
-rowData(rse_gene)$ensembl_id <- ss(rownames(rse_gene), "\\.")
+## Load SPEAQeasy gene level data
+rse_gene <- readRDS(here("processed-data", "02_SPEAQeasy", "rse_gene_living_brain_reanalysis_n516.Rds"))
+rowData(rse_gene)$ensembl_id <- rowData(rse_gene)$ensemblID
 
-exprs <- assays(rse_gene)$counts
-exprs <- exprs[rowSums(exprs) > 0, ]
-# write.csv(exprs, file = gzfile("tables/gene_counts_LBP.csv.gz")) # for bernie
-
-## add coi info
-pheno <- read.csv("phenotype/LBP_merged_phenotype.csv")
-rse_gene$COI <- factor(pheno$COI[match(colnames(rse_gene), pheno$specimenID)])
+## phenotype data
+rse_gene$COI <- factor(ifelse(rse_gene$isPostMortem, "PM", "LIV"))
+rse_gene$postmortem <- as.numeric(rse_gene$COI) - 1
 
 ## get RPKM
-yExprs <- log2(recount::getRPKM(rse_gene, "bp_length") + 1)
+dge <- DGEList(
+    counts = assays(rse_gene)$counts,
+    genes = rowData(rse_gene)
+)
+dge <- calcNormFactors(dge)
+yExprs <- rpkm(dge, gene.length = rowData(rse_gene)$Length, log = TRUE)
+
 rownames(yExprs) <- rowData(rse_gene)$ensembl_id
 yExprs_scaled <- scale(yExprs[rownames(coefEsts), ]) # filter to cell type genes, and scale
 
 ## do deconvolution
 propEsts <- minfi:::projectCellType(yExprs_scaled, coefEsts)
 propEsts_scaled <- prop.table(propEsts, 1)
-write.csv(propEsts_scaled, file = "phenotype/LBP_burkeDecon.csv")
+write.csv(propEsts_scaled, file = file.path(dir_rdata, "LBP_burkeDecon.csv"))
 
 ##  each variable vs COI
 pdf("plots/cellTypes_vs_coi.pdf")
