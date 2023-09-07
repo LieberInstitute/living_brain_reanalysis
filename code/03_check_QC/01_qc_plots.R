@@ -242,7 +242,7 @@ points(pca$x[, 2] ~ jitter(as.numeric(rse_gene$COI), amount = 0.15),
 dev.off()
 
 ### PC3
-pdf("plots/PC3_vs_COI.pdf")
+pdf(file.path(dir_plots, "PC3_vs_COI.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 1.7,
