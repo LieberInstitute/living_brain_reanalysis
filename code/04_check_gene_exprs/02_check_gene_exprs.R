@@ -70,13 +70,11 @@ rse_gene$samplingAge <- rse_gene$ageDeath_num.biospecimen
 ## model
 mod <- model.matrix(
     ~ COI + race + sex + diagnosis +
-        rin + cellPC + recount_qc.star.uniquely_mapped_reads_perc +
-        recount_qc.aligned_readsperc.chrm +
-        recount_qc.aligned_readsperc.chrx +
-        recount_qc.bc_auc.all_perc +
-        recount_qc.star.perc_of_reads_mapped_to_multiple_loci +
-        recount_qc.gene_fc.all_perc +
-        recount_qc.junction_avg_coverage,
+        rin + cellPC +
+        mitoRate +
+        totalAssignedGene +
+        rRNA_rate +
+        overallMapRate,
     data = colData(rse_gene)
 )
 qsvs_cell <- read.csv("qsv_matrices/qSVs_cell.csv", row.names = 1)
