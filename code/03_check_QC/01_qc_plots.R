@@ -262,7 +262,7 @@ points(pca$x[, 3] ~ jitter(as.numeric(rse_gene$COI), amount = 0.15),
 )
 dev.off()
 
-pdf("plots/PC3_vs_exonic.pdf")
+pdf(file.path(dir_plots, "PC3_vs_totalAssignedGene.pdf"))
 par(
     mar = c(4, 6, 2, 2),
     cex.axis = 1.7,
@@ -270,44 +270,22 @@ par(
 )
 palette(brewer.pal(4, "Dark2"))
 plot(
-    pca$x[, 3] ~ colData(rse_gene)[, nn[2]],
-    xlab = gsub("recount_qc.", "", nn[2], fixed = TRUE),
+    pca$x[, 3] ~ colData(rse_gene)[, nn[1]],
+    xlab = nn[1],
     ylab = paste0("PC3: ", pcaVars[3], "% Var Expl"),
     pch = 21,
     bg = rse_gene$COI
 )
 for (i in seq(along = gIndexes)) {
     ii <- gIndexes[[i]]
-    abline(lm(pca$x[, 3] ~ colData(rse_gene)[, nn[2]], subset = ii),
+    abline(lm(pca$x[, 3] ~ colData(rse_gene)[, nn[1]], subset = ii),
         lwd = 4,
         col = i
     )
 }
 dev.off()
 
-pdf("plots/exonic_vs_COI.pdf")
-par(
-    mar = c(4, 6, 2, 2),
-    cex.axis = 1.7,
-    cex.lab = 1.7
-)
-palette(brewer.pal(4, "Dark2"))
-boxplot(
-    colData(rse_gene)[, nn[2]] ~ rse_gene$COI,
-    ylab = gsub("recount_qc.", "", nn[2], fixed = TRUE),
-    xlab = "",
-    outline = FALSE,
-    ylim = range(colData(rse_gene)[, nn[2]])
-)
-points(
-    colData(rse_gene)[, nn[2]] ~
-        jitter(as.numeric(rse_gene$COI), amount = 0.15),
-    pch = 21,
-    bg = rse_gene$COI
-)
-dev.off()
-
-boxplot(rse_gene$recount_qc.aligned_readsperc.chrm ~ rse_gene$COI)
+boxplot(rse_gene$mitoRate ~ rse_gene$COI)
 
 ## Reproducibility information
 print("Reproducibility information:")
