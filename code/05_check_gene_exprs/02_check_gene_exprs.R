@@ -148,9 +148,12 @@ table(outGene_pc3$adj.P.Val < 0.05)
 
 outGene_order <- outGene[order(outGene$P.Value), ]
 outGene_order$mean_dir <- cumsum(sign(outGene_order$t)) / 1:nrow(outGene_order)
-plot(outGene_order$mean_dir)
 
-pdf("plots/published_vs_redone_tstat_modelCompare.pdf")
+pdf(file.path(dir_plots, "outGene_order_mean_dir.pdf"))
+plot(outGene_order$mean_dir)
+dev.off()
+
+pdf(file.path(dir_plots, "published_vs_redone_tstat_modelCompare.pdf"))
 par(
     mar = c(5, 6, 4, 2),
     cex.axis = 2,
