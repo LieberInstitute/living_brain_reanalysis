@@ -554,9 +554,9 @@ dev.off()
 plot_ind <- c(order(sumt)[1:25], order(sumt, decreasing = TRUE)[1:25])
 degradation_tstats_sumt <- degradation_tstats_out[plot_ind, ]
 tpm_degrade_order <- as.matrix(tpm_degrade[rownames(degradation_tstats_sumt), ])
-bIndexes <- splitit(pheno_degrade$BrNum)
+bIndexes <- splitit(rse_tx_degrade$BrNum)
 
-pdf("plots/degradation_transcripts_top.pdf")
+pdf(file.path(dir_plots, "degradation_transcripts_top.pdf"))
 par(
     mar = c(5, 6, 4, 2),
     cex.axis = 2,
@@ -566,9 +566,9 @@ par(
 palette(brewer.pal(5, "Set1"))
 for (i in 1:nrow(tpm_degrade_order)) {
     plot(
-        log2(tpm_degrade_order[i, ] + 1) ~ pheno_degrade$degrade_time,
+        log2(tpm_degrade_order[i, ] + 1) ~ rse_tx_degrade$degrade_time,
         pch = 21,
-        bg = pheno_degrade$BrNum,
+        bg = rse_tx_degrade$BrNum,
         cex = 2,
         xlab = "Degradation Time (min)",
         ylab = "log2(TPM+1)",
@@ -583,7 +583,7 @@ for (i in 1:nrow(tpm_degrade_order)) {
     )
     for (j in seq(along = bIndexes)) {
         lines(
-            log2(tpm_degrade_order[i, ] + 1) ~ pheno_degrade$degrade_time,
+            log2(tpm_degrade_order[i, ] + 1) ~ rse_tx_degrade$degrade_time,
             lwd = 2,
             col = j,
             subset = bIndexes[[j]]
@@ -598,7 +598,7 @@ for (i in 1:nrow(tpm_degrade_order)) {
 dev.off()
 
 tpm_lbp_order <- as.matrix(tpm[rownames(tpm_degrade_order), ])
-pdf("plots/degradation_transcripts_lbp.pdf")
+pdf(file.path(dir_plots, "degradation_transcripts_lbp.pdf"))
 par(
     mar = c(5, 6, 4, 2),
     cex.axis = 2,
@@ -634,13 +634,13 @@ dev.off()
 ### prediction modeling
 X <- as.data.frame(t(tpm_degrade[rownames(degradation_tstats)[1:10], ]))
 X_new <- as.data.frame(t(tpm[colnames(X), ]))
-X$Time <- pheno_degrade$degrade_time
+X$Time <- rse_tx_degrade$degrade_time
 
 f_pred <- lm(Time ~ ., data = X)
 
 pred_time <- predict(f_pred, X_new)
 
-pdf("plots/degradation_prediction_lbp.pdf")
+pdf(file.path(dir_plots, "degradation_prediction_lbp.pdf"))
 par(
     mar = c(5, 6, 2, 2),
     cex.axis = 2,
@@ -672,7 +672,7 @@ dev.off()
 ##########
 
 ## in living
-pheno_liv <- pheno[rse_tx$COI == "LIV", ]
+pheno_liv <- colData(rse_tx)[rse_tx$COI == "LIV", ]
 pheno_liv$diagnosis <- droplevels(pheno_liv$diagnosis)
 mod_liv <- model.matrix(~ samplingAge + sex + diagnosis + race + rnaBatch + libraryBatch,
     data = pheno_liv
@@ -686,7 +686,7 @@ f_liv_standard <- lmFit(log2(tpm_liv + 1), cbind(mod_liv, standard_qsv_liv))
 f_liv_cell <- lmFit(log2(tpm_liv + 1), cbind(mod_liv, cell_qsv_liv))
 
 ## in pm
-pheno_pm <- pheno[rse_tx$COI == "PM", ]
+pheno_pm <- colData(rse_tx)[rse_tx$COI == "PM", ]
 pheno_pm$diagnosis <- droplevels(pheno_pm$diagnosis)
 mod_pm <- model.matrix(~ samplingAge + sex + diagnosis + race + rnaBatch + libraryBatch,
     data = pheno_pm
