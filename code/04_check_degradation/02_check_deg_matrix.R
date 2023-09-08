@@ -511,14 +511,16 @@ table(out_top100$adj.P.Val < 0.05)
 #  FALSE   TRUE
 # 154976  41462
 
-degradation_tstats_out <- degradation_tstats[match(out$transcript_id, rownames(degradation_tstats)), ]
+degradation_tstats_out <- degradation_tstats[match(out$transcript_id, degradation_tstats$transcript_id), ]
 
+pdf(file.path(dir_plots, "smootScatter_out_t_vs_degradation_t.pdf"))
 smoothScatter(out$t, degradation_tstats_out$t)
+dev.off()
 
 sumt <- degradation_tstats_out$t + out$t
 # cir_ind = c(which.min(sumt), which.max(sumt))
 
-pdf("plots/Dequal_txLevel.pdf")
+pdf(file.path(dir_plots, "Dequal_txLevel.pdf"))
 par(
     mar = c(5, 6, 4, 2),
     cex.axis = 2,
