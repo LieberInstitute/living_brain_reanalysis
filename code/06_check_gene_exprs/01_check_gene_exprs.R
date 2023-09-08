@@ -9,9 +9,9 @@ library("sessioninfo")
 set.seed(20230907)
 
 ## Create output directories
-dir_plots <- here("plots", "05_check_gene_exprs")
+dir_plots <- here("plots", "06_check_gene_exprs")
 dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
-dir_rdata <- here("processed-data", "05_check_gene_exprs")
+dir_rdata <- here("processed-data", "06_check_gene_exprs")
 dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
 ## published results
@@ -34,7 +34,7 @@ rse_gene$COI <- factor(ifelse(rse_gene$isPostMortem, "PM", "LIV"))
 rse_gene$postmortem <- as.numeric(rse_gene$COI) - 1
 
 ## add cell comp PCs
-cellProps <- read.csv(file.path(dir_rdata, "LBP_burkeDecon.csv"), row.names = 1)
+cellProps <- read.csv(here("processed-data", "04_deconvolution", "LBP_burkeDecon.csv"), row.names = 1)
 cellProps <- cellProps[colnames(rse_gene), ]
 cellPca <- prcomp(cellProps)
 getPcaVars(cellPca)[1:2]
@@ -81,7 +81,7 @@ mod <- model.matrix(
         overallMapRate,
     data = colData(rse_gene)
 )
-qsvs_cell <- read.csv(here("processed-data", "04_check_degradation", "qSVs_cell.csv"), row.names = 1)
+qsvs_cell <- read.csv(here("processed-data", "05_check_degradation", "qSVs_cell.csv"), row.names = 1)
 mod_qsva <- cbind(mod, qsvs_cell[rownames(mod), ])
 
 mod_pc3 <- cbind(mod, PC3 = pca$x[, 3])
@@ -223,7 +223,7 @@ mod_liv <- model.matrix(
         overallMapRate,
     data = colData(rse_liv)
 )
-qsvs_liv_cell <- read.csv(here("processed-data", "04_check_degradation", "qSVs_cell_liv.csv"), row.names = 1)
+qsvs_liv_cell <- read.csv(here("processed-data", "05_check_degradation", "qSVs_cell_liv.csv"), row.names = 1)
 mod_liv_qsva <- cbind(mod_liv, qsvs_liv_cell[rownames(mod_liv), ])
 dge_liv <- dge[, rownames(mod_liv)]
 
@@ -282,7 +282,7 @@ mod_pm <- model.matrix(
     data = colData(rse_pm)
 )
 
-qsvs_pm_cell <- read.csv(here("processed-data", "04_check_degradation", "qSVs_cell_pm.csv"), row.names = 1)
+qsvs_pm_cell <- read.csv(here("processed-data", "05_check_degradation", "qSVs_cell_pm.csv"), row.names = 1)
 mod_pm_qsva <- cbind(mod_pm, qsvs_pm_cell[rownames(mod_pm), ])
 dge_pm <- dge[, rownames(mod_pm)]
 
