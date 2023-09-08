@@ -1,10 +1,9 @@
 library("qsvaR")
 library("SummarizedExperiment")
-library("parallel")
+# library("parallel")
 library("jaffelab")
 library("limma")
 library("rtracklayer")
-library("recount3")
 library("RColorBrewer")
 library("here")
 library("sessioninfo")
@@ -18,47 +17,38 @@ dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
 dir_rdata <- here("processed-data", "04_check_degradation")
 dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
-dir.create("qsv_matrices")
-dir.create("phenotype")
+## Load SPEAQeasy gene level data
+rse_tx_full <- readRDS(here("processed-data", "02_SPEAQeasy", "rse_tx_living_brain_reanalysis_n516.Rds"))
 
-data_path <- "/shared-data/research/genomics/datasets/synapse/LBP/"
+## phenotype data
+rse_tx_full$COI <- factor(ifelse(rse_tx_full$isPostMortem, "PM", "LIV"))
+rse_tx_full$postmortem <- as.numeric(rse_tx_full$COI) - 1
 
-## read in transcripts
-tpm <- read.delim(file.path(data_path, "recount_salmon/all_salmon_tpms.tsv"),
-    row.names = 1
-)
-tpm$Length <- NULL
 
-## annotation info
-gtf <- import(
-    "/shared-data/research/genomics/datasets/recount3/ref/hg38/gtf/genes.transcripts.gtf"
-)
-anno <- mcols(gtf)[, c("transcript_id", "transcript_type", "gene_name", "gene_id")]
-anno <- anno[match(rownames(tpm), anno$transcript_id), ]
 
-# ## get pheno for postmortem vs living
-# biospec = read.csv(file.path(data_path, "LBP_biospecimen_metadata.csv"))
-# assay = read.csv(file.path(data_path, "LBP_assay_RNAseq_metadata.csv"))
-# indiv = read.csv(file.path(data_path, "LBP_individual_metadata.csv"))
-# pheno = dplyr::left_join(assay, biospec)
-# pheno = dplyr::left_join(pheno, indiv)
-# write.csv(pheno, file = "phenotype/LBP_merged_phenotype.csv",row.names=FALSE)
-pheno <- read.csv("phenotype/LBP_merged_phenotype.csv")
-pheno$COI <- factor(ifelse(pheno$isPostMortem, "PM", "LIV"))
+## read in degradation data
+rse_tx_degrade_full <- readRDS(file.path(dir_rdata, "rse_degrade_tx.Rds"))
 
-## put tpm in same order
-tpm <- tpm[, pheno$specimenID]
 
-## read in degradation tpm
-tpm_degrade <- read.delim(
-    "/shared-data/research/genomics/datasets/libd/SRP108559/SRP108559.TPM.pasted.tsv",
-    row.names = 1
-)
-tpm_degrade <- tpm_degrade[, -1] # drop length
-hp <- available_projects()
-rse_degrade <- create_rse(hp[hp$project == "SRP108559", ])
-rse_degrade <- expand_sra_attributes(rse_degrade)
-rse_degrade <- rse_degrade[, rse_degrade$sra_attribute.library_type == "RiboZero"]
+table(rownames(rse_tx_full) %in% rownames(rse_tx_degrade_full))
+ # FALSE   TRUE
+ #  1655 196438
+
+## Subset to the same transcripts measured here
+rse_tx <- rse_tx_full[rownames(rse_tx_full) %in% rownames(rse_tx_degrade_full), ]
+rse_tx_degrade <- rse_tx_degrade_full[rownames(rse_tx), ]
+
+## Further subset the degradation data to just the RiboZero samples
+rse_tx_degrade <- rse_tx_degrade[, rse_tx_degrade$sra_attribute.library_type == "RiboZero"]
+
+## Also update the annotation information
+rowRanges(rse_tx_degrade) <- rowRanges(rse_tx)
+
+
+## Extract the tpm values
+tpm <- assay(rse_tx, "tpm")
+tpm_degrade <- assay(rse_tx_degrade, "TPM")
+
 pheno_degrade <- colData(rse_degrade)
 pheno_degrade$BrNum <- factor(pheno_degrade$sra_attribute.brain_number)
 pheno_degrade$degrade_time <- as.numeric(pheno_degrade$sra_attribute.degradation_time)
@@ -74,7 +64,7 @@ degradation_tstats <- topTable(
     coef = 2,
     sort = "none",
     n = nrow(tpm_degrade),
-    genelist = anno
+    genelist = rowData(rse_tx)
 )
 degradation_tstats <- degradation_tstats[order(degradation_tstats$P.Value), ]
 
@@ -144,7 +134,7 @@ coi_assoc <- lapply(qsva_list[c(1, 4, 7:11)], function(y) {
 })
 coi_assoc
 
-anno[match(rownames(degradation_tstats)[1:10], anno$transcript_id), ]
+# anno[match(rownames(degradation_tstats)[1:10], anno$transcript_id), ]
 
 boxplot(
     qsva_list$tpm_top10$qSVs ~ pheno$COI,
@@ -234,7 +224,7 @@ out <- topTable(
     coef = 2,
     sort = "none",
     n = nrow(tpm),
-    genelist = anno
+    genelist = rowData(rse_tx)
 )
 
 ## against degradation
@@ -256,7 +246,7 @@ out_standard <- topTable(
     coef = 2,
     sort = "none",
     n = nrow(tpm),
-    genelist = anno
+    genelist = rowData(rse_tx)
 )
 
 f_cell <- lmFit(log2(tpm + 1), cbind(mod, qsva_list$tpm_cell$qSVs))
@@ -265,7 +255,7 @@ out_cell <- topTable(
     coef = 2,
     sort = "none",
     n = nrow(tpm),
-    genelist = anno
+    genelist = rowData(rse_tx)
 )
 
 cor(out_cell$t, out$t)
@@ -278,7 +268,7 @@ out_top100 <- topTable(
     coef = 2,
     sort = "none",
     n = nrow(tpm),
-    genelist = anno
+    genelist = rowData(rse_tx)
 )
 
 table(out$adj.P.Val < 0.05)
