@@ -373,6 +373,10 @@ dev.off()
 ## For simplicity later on, I'll use this variable name
 rse_tx$samplingAge <- rse_tx$ageDeath_num.biospecimen
 
+## Fix race since it has 206 NAs
+rse_tx$race <- as.character(rse_tx$race)
+rse_tx$race[is.na(rse_tx$race)] <- "Unknown"
+
 ## add cell comp PCs
 cellProps <- read.csv(here("processed-data", "05_check_gene_exprs", "LBP_burkeDecon.csv"), row.names = 1)
 cellProps <- cellProps[colnames(rse_gene), ]
