@@ -81,7 +81,7 @@ mod <- model.matrix(
         overallMapRate,
     data = colData(rse_gene)
 )
-qsvs_cell <- read.csv("qsv_matrices/qSVs_cell.csv", row.names = 1)
+qsvs_cell <- read.csv(here("processed-data", "04_check_degradation", "qSVs_cell.csv", row.names = 1)
 mod_qsva <- cbind(mod, qsvs_cell[rownames(mod), ])
 
 mod_pc3 <- cbind(mod, PC3 = pca$x[, 3])
