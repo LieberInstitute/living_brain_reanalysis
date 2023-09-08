@@ -68,20 +68,20 @@ eIndex <- which(rowData(rse_gene)$ensembl_id %in% res$ensembl_id)
 rse_gene$samplingAge <- rse_gene$ageDeath_num.biospecimen
 
 ## Fix race since it has 206 NAs
-rse_tx$race <- as.character(rse_tx$race)
-rse_tx$race[is.na(rse_tx$race)] <- "Unknown"
+rse_gene$race <- as.character(rse_gene$race)
+rse_gene$race[is.na(rse_gene$race)] <- "Unknown"
 
 ## model
 mod <- model.matrix(
     ~ COI + race + sex + diagnosis +
-        rin + cellPC +
+        RIN + cellPC +
         mitoRate +
         totalAssignedGene +
         rRNA_rate +
         overallMapRate,
     data = colData(rse_gene)
 )
-qsvs_cell <- read.csv(here("processed-data", "04_check_degradation", "qSVs_cell.csv", row.names = 1)
+qsvs_cell <- read.csv(here("processed-data", "04_check_degradation", "qSVs_cell.csv"), row.names = 1)
 mod_qsva <- cbind(mod, qsvs_cell[rownames(mod), ])
 
 mod_pc3 <- cbind(mod, PC3 = pca$x[, 3])
@@ -104,6 +104,13 @@ outGene <- topTable(
     number = nrow(dge)
 )
 outGene$isExprs <- outGene$ensembl_id %in% res$ensembl_id
+table(outGene$isExprs)
+# FALSE  TRUE
+# 36882 21155
+dim(outGene)
+# [1] 58037    18
+dim(res)
+# [1] 21635     8
 outGene$adj.P.Val <- NA
 outGene$adj.P.Val[outGene$isExprs] <- p.adjust(outGene$P.Value[outGene$isExprs], "fdr")
 
@@ -130,8 +137,14 @@ outGene_pc3$adj.P.Val <- NA
 outGene_pc3$adj.P.Val[outGene_pc3$isExprs] <- p.adjust(outGene_pc3$P.Value[outGene_pc3$isExprs], "fdr")
 
 table(outGene$adj.P.Val < 0.05)
+# FALSE  TRUE
+#  5602 15553
 table(outGene_qsva$adj.P.Val < 0.05)
+# FALSE  TRUE
+# 17423  3732
 table(outGene_pc3$adj.P.Val < 0.05)
+# FALSE  TRUE
+#  5736 15419
 
 outGene_order <- outGene[order(outGene$P.Value), ]
 outGene_order$mean_dir <- cumsum(sign(outGene_order$t)) / 1:nrow(outGene_order)
