@@ -64,7 +64,7 @@ pca <- prcomp(t(log_rpkm))
 # use their genes for FDR calc
 eIndex <- which(rowData(rse_gene)$ensembl_id %in% res$ensembl_id)
 
-## For simplicity later on, I'll use this varaible name
+## For simplicity later on, I'll use this variable name
 rse_gene$samplingAge <- rse_gene$ageDeath_num.biospecimen
 
 ## model
