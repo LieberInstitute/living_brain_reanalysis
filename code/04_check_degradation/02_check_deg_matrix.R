@@ -44,27 +44,47 @@ rse_tx_degrade <- rse_tx_degrade[, rse_tx_degrade$sra_attribute.library_type == 
 ## Also update the annotation information
 rowRanges(rse_tx_degrade) <- rowRanges(rse_tx)
 
+## Fix some variables in rse_tx_degrade
+rse_tx_degrade$BrNum <- factor(rse_tx_degrade$sra_attribute.brain_number)
+rse_tx_degrade$degrade_time <- as.numeric(rse_tx_degrade$sra_attribute.degradation_time)
+
+## Sort by brain donor and degradation time
+rse_tx_degrade <- rse_tx_degrade[, order(rse_tx_degrade$BrNum, rse_tx_degrade$degrade_time)]
+as.data.frame(colData(rse_tx_degrade)[, c("BrNum", "degrade_time")])
+#             BrNum degrade_time
+# SRR5643537 Br1385            0
+# SRR5643538 Br1385           15
+# SRR5643535 Br1385           30
+# SRR5643536 Br1385           60
+# SRR5643533 Br1729            0
+# SRR5643534 Br1729           15
+# SRR5643531 Br1729           30
+# SRR5643532 Br1729           60
+# SRR5643539 Br2015            0
+# SRR5643540 Br2015           15
+# SRR5643548 Br2015           30
+# SRR5643547 Br2015           60
+# SRR5643530 Br2020            0
+# SRR5643529 Br2020           15
+# SRR5643544 Br2020           30
+# SRR5643543 Br2020           60
+# SRR5643546 Br2074            0
+# SRR5643545 Br2074           15
+# SRR5643542 Br2074           30
+# SRR5643541 Br2074           60
 
 ## Extract the tpm values
 tpm <- assay(rse_tx, "tpm")
 tpm_degrade <- assay(rse_tx_degrade, "TPM")
 
-pheno_degrade <- colData(rse_degrade)
-pheno_degrade$BrNum <- factor(pheno_degrade$sra_attribute.brain_number)
-pheno_degrade$degrade_time <- as.numeric(pheno_degrade$sra_attribute.degradation_time)
-
-pheno_degrade <- pheno_degrade[order(pheno_degrade$BrNum, pheno_degrade$degrade_time), ]
-tpm_degrade <- tpm_degrade[, rownames(pheno_degrade)]
-
 ### recalculate degradation stas for all isoforms, not just 45k in objects
-mod_degrade <- model.matrix(~ degrade_time + BrNum, data = pheno_degrade)
-fit_degrade <- lmFit(log2(tpm_degrade + 1), mod_degrade)
+fit_degrade <- lmFit(log2(tpm_degrade + 1), model.matrix(~ degrade_time + BrNum, data = colData(rse_tx_degrade)))
 degradation_tstats <- topTable(
     eBayes(fit_degrade),
     coef = 2,
     sort = "none",
     n = nrow(tpm_degrade),
-    genelist = rowData(rse_tx)
+    genelist = rowData(rse_tx_degrade)
 )
 degradation_tstats <- degradation_tstats[order(degradation_tstats$P.Value), ]
 
@@ -72,7 +92,11 @@ degradation_tstats <- degradation_tstats[order(degradation_tstats$P.Value), ]
 ## plots for top degradation t-stats
 # filter to rows
 cell_rows <- rownames(tpm) %in% transcripts$cell_component
+sum(cell_rows)
+# [1] 2924
 standard_rows <- rownames(tpm) %in% transcripts$standard
+sum(standard_rows)
+# [1] 1760
 
 top10_rows <- rownames(tpm) %in% rownames(degradation_tstats)[1:10]
 top25_rows <- rownames(tpm) %in% rownames(degradation_tstats)[1:25]
@@ -83,17 +107,50 @@ top200_rows <- rownames(tpm) %in% rownames(degradation_tstats)[1:200]
 ## make list of TPMs
 tpm_list <- list(
     tpm_standard = tpm[standard_rows, ],
-    tpm_standard_pm = tpm[standard_rows, pheno$COI == "PM"],
-    tpm_standard_liv = tpm[standard_rows, pheno$COI == "LIV"],
+    tpm_standard_pm = tpm[standard_rows, rse_tx$COI == "PM"],
+    tpm_standard_liv = tpm[standard_rows, rse_tx$COI == "LIV"],
     tpm_cell = tpm[cell_rows, ],
-    tpm_cell_pm = tpm[cell_rows, pheno$COI == "PM"],
-    tpm_cell_liv = tpm[cell_rows, pheno$COI == "LIV"],
+    tpm_cell_pm = tpm[cell_rows, rse_tx$COI == "PM"],
+    tpm_cell_liv = tpm[cell_rows, rse_tx$COI == "LIV"],
     tpm_top10 = tpm[top10_rows, ],
     tpm_top25 = tpm[top25_rows, ],
     tpm_top50 = tpm[top50_rows, ],
     tpm_top100 = tpm[top100_rows, ],
     tpm_top200 = tpm[top200_rows, ]
 )
+lapply(tpm_list, dim)
+# $tpm_standard
+# [1] 1760  516
+#
+# $tpm_standard_pm
+# [1] 1760  243
+#
+# $tpm_standard_liv
+# [1] 1760  273
+#
+# $tpm_cell
+# [1] 2924  516
+#
+# $tpm_cell_pm
+# [1] 2924  243
+#
+# $tpm_cell_liv
+# [1] 2924  273
+#
+# $tpm_top10
+# [1]  10 516
+#
+# $tpm_top25
+# [1]  25 516
+#
+# $tpm_top50
+# [1]  50 516
+#
+# $tpm_top100
+# [1] 100 516
+#
+# $tpm_top200
+# [1] 200 516
 
 set.seed(743)
 qsva_list <- mclapply(tpm_list, function(x) {
