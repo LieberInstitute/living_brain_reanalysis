@@ -1,12 +1,22 @@
-###
-library(qsvaR)
-library(SummarizedExperiment)
-library(parallel)
-library(jaffelab)
-library(limma)
-library(rtracklayer)
-library(recount3)
-library(RColorBrewer)
+library("qsvaR")
+library("SummarizedExperiment")
+library("parallel")
+library("jaffelab")
+library("limma")
+library("rtracklayer")
+library("recount3")
+library("RColorBrewer")
+library("here")
+library("sessioninfo")
+
+## For reproducing the jitter output
+set.seed(20230907)
+
+## Create output directories
+dir_plots <- here("plots", "04_check_degradation")
+dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
+dir_rdata <- here("processed-data", "04_check_degradation")
+dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
 dir.create("qsv_matrices")
 dir.create("phenotype")
@@ -402,3 +412,10 @@ mean(sex_liv_cell$P.Value[sex_pm_cell$P.Value < 1e-4] < 0.05 &
 smoothScatter(sex_liv$t, sex_pm$t)
 smoothScatter(sex_liv_standard$t, sex_pm_standard$t)
 smoothScatter(sex_liv_cell$t, sex_pm_cell$t)
+
+## Reproducibility information
+print("Reproducibility information:")
+Sys.time()
+proc.time()
+options(width = 120)
+sessioninfo::session_info()
