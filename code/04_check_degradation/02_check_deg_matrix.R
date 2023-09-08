@@ -309,21 +309,63 @@ boxplot(
 dev.off()
 
 
-### read in rnaseq metrics
-metrics <- read.csv("phenotype/LBP_merged_seqmetrics.csv")
-metrics <- metrics[match(rse_tx$specimenID, metrics$external_id), ]
+## Compare against RNAseq metrics
+gIndexes <- splitit(rse_tx$COI)
+
+pdf(file.path(dir_plots, "qSV1_top10_vs_totalAssignedGene.pdf"))
+par(
+    mar = c(4, 6, 2, 2),
+    cex.axis = 2,
+    cex.lab = 2
+)
+palette(brewer.pal(4, "Dark2"))
 plot(
     qsva_list$tpm_top10$qSVs,
-    metrics$recount_qc.intron_sum_perc
+    rse_tx$totalAssignedGene,
+    xlab = paste0(
+        "qSV1 (top10 Tx: ", qsva_list$tpm_top10$varExpl[1],
+        "% Var Expl)"
+    ),
+    ylab = "totalAssignedGene",
+    pch = 21,
+    bg = rse_tx$COI
 )
+for (i in seq(along = gIndexes)) {
+    ii <- gIndexes[[i]]
+    abline(lm(rse_tx$totalAssignedGene ~ qsva_list$tpm_top10$qSVs, subset = ii),
+        lwd = 4,
+        col = i
+    )
+}
+dev.off()
+
+
+pdf(file.path(dir_plots, "qSV1_top10_vs_mitoRate.pdf"))
+par(
+    mar = c(4, 6, 2, 2),
+    cex.axis = 2,
+    cex.lab = 2
+)
+palette(brewer.pal(4, "Dark2"))
 plot(
     qsva_list$tpm_top10$qSVs,
-    metrics$recount_qc.exon_fc.unique_perc
+    rse_tx$mitoRate,
+    xlab = paste0(
+        "qSV1 (top10 Tx: ", qsva_list$tpm_top10$varExpl[1],
+        "% Var Expl)"
+    ),
+    ylab = "mitoRate",
+    pch = 21,
+    bg = rse_tx$COI
 )
-plot(
-    qsva_list$tpm_top10$qSVs,
-    metrics$"recount_qc.bc_auc.all_reads_annotated_bases"
-)
+for (i in seq(along = gIndexes)) {
+    ii <- gIndexes[[i]]
+    abline(lm(rse_tx$mitoRate ~ qsva_list$tpm_top10$qSVs, subset = ii),
+        lwd = 4,
+        col = i
+    )
+}
+dev.off()
 
 ###########
 ## de checks
