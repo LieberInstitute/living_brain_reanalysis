@@ -317,14 +317,14 @@ plot(
 
 ###########
 ## de checks
-pheno$race[pheno$race == "White "] <- "White"
-pheno$race[pheno$race == ""] <- "Unknown"
-pheno$diagnosis[pheno$diagnosis == "Parkinson's disease "] <- "Parkinson's disease"
-pheno$samplingAge[pheno$samplingAge == "89+"] <- 89
-pheno$samplingAge <- as.numeric(pheno$samplingAge)
-rownames(pheno) <- pheno$specimenID
-pheno$diagnosis <- factor(pheno$diagnosis)
-pheno$diagnosis <- relevel(pheno$diagnosis, "control")
+rse_tx$race[rse_tx$race == "White "] <- "White"
+rse_tx$race[rse_tx$race == ""] <- "Unknown"
+rse_tx$diagnosis[rse_tx$diagnosis == "Parkinson's disease "] <- "Parkinson's disease"
+rse_tx$samplingAge[rse_tx$samplingAge == "89+"] <- 89
+rse_tx$samplingAge <- as.numeric(rse_tx$samplingAge)
+rownames(pheno) <- rse_tx$specimenID
+rse_tx$diagnosis <- factor(rse_tx$diagnosis)
+rse_tx$diagnosis <- relevel(rse_tx$diagnosis, "control")
 
 pheno <- cbind(pheno, metrics)
 
@@ -495,7 +495,7 @@ par(
 palette(brewer.pal(5, "Dark2"))
 for (i in 1:nrow(tpm_degrade_order)) {
     boxplot(
-        log2(tpm_lbp_order[i, ] + 1) ~ pheno$COI,
+        log2(tpm_lbp_order[i, ] + 1) ~ rse_tx$COI,
         xlab = "",
         ylab = "log2(TPM+1)",
         ylim = range(log2(tpm_lbp_order[i, ] + 1)),
@@ -511,9 +511,9 @@ for (i in 1:nrow(tpm_degrade_order)) {
     )
 
     points(
-        log2(tpm_lbp_order[i, ] + 1) ~ jitter(as.numeric(pheno$COI), amount = 0.15),
+        log2(tpm_lbp_order[i, ] + 1) ~ jitter(as.numeric(rse_tx$COI), amount = 0.15),
         pch = 21,
-        bg = pheno$COI
+        bg = rse_tx$COI
     )
 }
 dev.off()
@@ -536,20 +536,20 @@ par(
 )
 palette(brewer.pal(5, "Dark2"))
 boxplot(
-    pred_time ~ pheno$COI,
+    pred_time ~ rse_tx$COI,
     xlab = "",
     ylab = "Predicted Degradation Time (Min)",
     ylim = range(pred_time),
     outline = FALSE
 )
-points(pred_time ~ jitter(as.numeric(pheno$COI), amount = 0.15),
+points(pred_time ~ jitter(as.numeric(rse_tx$COI), amount = 0.15),
     pch = 21,
-    bg = pheno$COI
+    bg = rse_tx$COI
 )
 legend("topleft", paste0(
     "p=",
     signif(summary(
-        lm(pred_time ~ pheno$COI)
+        lm(pred_time ~ rse_tx$COI)
     )$coef[2, 4], 3)
 ), cex = 2)
 dev.off()
@@ -559,7 +559,7 @@ dev.off()
 ##########
 
 ## in living
-pheno_liv <- pheno[pheno$COI == "LIV", ]
+pheno_liv <- pheno[rse_tx$COI == "LIV", ]
 pheno_liv$diagnosis <- droplevels(pheno_liv$diagnosis)
 mod_liv <- model.matrix(~ samplingAge + sex + diagnosis + race + rnaBatch + libraryBatch,
     data = pheno_liv
@@ -573,7 +573,7 @@ f_liv_standard <- lmFit(log2(tpm_liv + 1), cbind(mod_liv, standard_qsv_liv))
 f_liv_cell <- lmFit(log2(tpm_liv + 1), cbind(mod_liv, cell_qsv_liv))
 
 ## in pm
-pheno_pm <- pheno[pheno$COI == "PM", ]
+pheno_pm <- pheno[rse_tx$COI == "PM", ]
 pheno_pm$diagnosis <- droplevels(pheno_pm$diagnosis)
 mod_pm <- model.matrix(~ samplingAge + sex + diagnosis + race + rnaBatch + libraryBatch,
     data = pheno_pm
