@@ -284,6 +284,7 @@ cor(qsva_list$tpm_standard$qSVs[, 1], qsva_list$tpm_cell$qSVs[, 1])
 qsva_list$tpm_standard$varExpl
 # [1] 63.200  6.170  5.020  3.270  2.920  1.620  1.220  1.030  0.917  0.681
 
+pdf(file.path(dir_plots, "qSV1_standard_vs_COI.pdf"))
 boxplot(
     qsva_list$tpm_standard$qSVs[, 1] ~ rse_tx$COI,
     ylab = paste0(
@@ -293,10 +294,19 @@ boxplot(
     ),
     xlab = ""
 )
-boxplot(qsva_list$tpm_cell[, 1] ~ rse_tx$COI,
-    ylab = "qSV1 (cell)",
+dev.off()
+
+pdf(file.path(dir_plots, "qSV1_cell_vs_COI.pdf"))
+boxplot(
+    qsva_list$tpm_cell$qSVs[, 1] ~ rse_tx$COI,
+    ylab = paste0(
+        "qSV1 (cell: ",
+        qsva_list$tpm_cell$varExpl[1],
+        "% Var Expl)"
+    ),
     xlab = ""
 )
+dev.off()
 
 
 ### read in rnaseq metrics
