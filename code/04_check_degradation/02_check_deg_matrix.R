@@ -174,10 +174,10 @@ save(qsva_list, file = file.path(dir_rdata, "qsva_objects.RData"))
 ## write out as text
 for (i in seq(along = qsva_list)) {
     write.csv(qsva_list[[i]]$qSVs,
-        file = paste0(
-            "qsv_matrices/qSVs_",
+        file = file.path(dir_rdata,paste0(
+            "qSVs_",
             gsub("tpm_", "", names(qsva_list)[i]), ".csv"
-        )
+        ))
     )
 }
 
