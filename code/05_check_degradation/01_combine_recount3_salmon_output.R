@@ -4,7 +4,7 @@ library("sessioninfo")
 
 ## Create output directories
 dir_rdata <-
-    here("processed-data", "04_check_degradation", "recount3_salmon")
+    here("processed-data", "05_check_degradation", "recount3_salmon")
 dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
 
@@ -76,7 +76,7 @@ saveRDS(
     rse_degrade_tx,
     file = here(
         "processed-data",
-        "04_check_degradation",
+        "05_check_degradation",
         "rse_degrade_tx.Rds"
     )
 )

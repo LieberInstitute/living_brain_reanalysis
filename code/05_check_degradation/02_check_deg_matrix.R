@@ -12,9 +12,9 @@ library("sessioninfo")
 set.seed(20230907)
 
 ## Create output directories
-dir_plots <- here("plots", "04_check_degradation")
+dir_plots <- here("plots", "05_check_degradation")
 dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
-dir_rdata <- here("processed-data", "04_check_degradation")
+dir_rdata <- here("processed-data", "05_check_degradation")
 dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
 ## Load SPEAQeasy gene level data
@@ -378,7 +378,7 @@ rse_tx$race <- as.character(rse_tx$race)
 rse_tx$race[is.na(rse_tx$race)] <- "Unknown"
 
 ## add cell comp PCs
-cellProps <- read.csv(here("processed-data", "05_check_gene_exprs", "LBP_burkeDecon.csv"), row.names = 1)
+cellProps <- read.csv(here("processed-data", "04_deconvolution", "LBP_burkeDecon.csv"), row.names = 1)
 cellProps <- cellProps[colnames(rse_gene), ]
 cellPca <- prcomp(cellProps)
 getPcaVars(cellPca)[1:2]
