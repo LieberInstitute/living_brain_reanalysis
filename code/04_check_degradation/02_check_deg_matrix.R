@@ -1,6 +1,6 @@
 library("qsvaR")
 library("SummarizedExperiment")
-# library("parallel")
+library("parallel")
 library("jaffelab")
 library("limma")
 library("rtracklayer")
@@ -163,12 +163,13 @@ qsva_list <- mclapply(tpm_list, function(x) {
     list(qSVs = qsvs, varExpl = var_expl)
 }, mc.cores = 6)
 
-save(qsva_list, file = "qsv_matrices/qsva_objects.RData")
+## Save for later
+save(qsva_list, file = file.path(dir_rdata, "qsva_objects.RData"))
 
 
 #############
 ## load objects
-load("qsv_matrices/qsva_objects.RData")
+# load(file.path(dir_rdata, "qsva_objects.RData"), verbose = TRUE)
 
 ## write out as text
 for (i in seq(along = qsva_list)) {
