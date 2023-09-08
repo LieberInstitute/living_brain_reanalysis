@@ -31,8 +31,8 @@ rse_tx_degrade_full <- readRDS(file.path(dir_rdata, "rse_degrade_tx.Rds"))
 
 
 table(rownames(rse_tx_full) %in% rownames(rse_tx_degrade_full))
- # FALSE   TRUE
- #  1655 196438
+# FALSE   TRUE
+#  1655 196438
 
 ## Subset to the same transcripts measured here
 rse_tx <- rse_tx_full[rownames(rse_tx_full) %in% rownames(rse_tx_degrade_full), ]
@@ -174,7 +174,7 @@ save(qsva_list, file = file.path(dir_rdata, "qsva_objects.RData"))
 ## write out as text
 for (i in seq(along = qsva_list)) {
     write.csv(qsva_list[[i]]$qSVs,
-        file = file.path(dir_rdata,paste0(
+        file = file.path(dir_rdata, paste0(
             "qSVs_",
             gsub("tpm_", "", names(qsva_list)[i]), ".csv"
         ))
@@ -186,40 +186,106 @@ coi_assoc <- lapply(qsva_list[c(1, 4, 7:11)], function(y) {
     round(-log10(apply(
         t(t(y$qSVs)), 2,
         function(x) {
-            t.test(x ~ pheno$COI)$p.value
+            t.test(x ~ rse_tx$COI)$p.value
         }
     )), 1)
 })
 coi_assoc
+# $tpm_standard
+#  PC1  PC2  PC3  PC4  PC5  PC6  PC7  PC8  PC9 PC10
+# 26.5  0.6 50.3  3.3 18.3  0.0  5.9  1.3  0.8  0.6
+#
+# $tpm_cell
+#  PC1  PC2  PC3  PC4  PC5  PC6  PC7  PC8  PC9 PC10 PC11 PC12 PC13 PC14 PC15 PC16
+# 35.0  8.0 26.2  2.1 26.9  1.1  0.5  0.9  1.6  0.0  0.3  0.5  0.5  6.7  0.3  0.8
+#
+# $tpm_top10
+# [1] 8
+#
+# $tpm_top25
+# [1] 8.6
+#
+# $tpm_top50
+# [1] 18.6
+#
+# $tpm_top100
+#  PC1  PC2  PC3
+# 21.1 62.2  0.7
+#
+# $tpm_top200
+#  PC1  PC2  PC3
+# 21.0 13.8 44.8
 
-# anno[match(rownames(degradation_tstats)[1:10], anno$transcript_id), ]
+degradation_tstats[1:10, ]
+#                   source       type score phase            gene_id                          gene_type gene_status     gene_name level           havana_gene     transcript_id      transcript_type
+# ENST00000623212.1 HAVANA transcript    NA    NA  ENSG00000278935.1                                TEC       KNOWN  RP11-173D3.4     2  OTTHUMG00000175828.1 ENST00000623212.1                  TEC
+# ENST00000507754.8 HAVANA transcript    NA    NA ENSG00000186010.18                     protein_coding       KNOWN       NDUFA13     2  OTTHUMG00000162211.8 ENST00000507754.8       protein_coding
+# ENST00000602936.1 HAVANA transcript    NA    NA  ENSG00000233012.2   transcribed_processed_pseudogene       KNOWN       HDAC1P2     2  OTTHUMG00000037360.2 ENST00000602936.1 processed_transcript
+# ENST00000636670.1 HAVANA transcript    NA    NA ENSG00000141837.19                     protein_coding       KNOWN       CACNA1A     2 OTTHUMG00000044590.16 ENST00000636670.1      retained_intron
+# ENST00000540997.2 HAVANA transcript    NA    NA ENSG00000185495.10 transcribed_unprocessed_pseudogene       KNOWN RP11-504P24.3     2  OTTHUMG00000037472.2 ENST00000540997.2      retained_intron
+# ENST00000489327.1 HAVANA transcript    NA    NA ENSG00000115977.18                     protein_coding       KNOWN          AAK1     2  OTTHUMG00000129648.9 ENST00000489327.1      retained_intron
+# ENST00000381759.8 HAVANA transcript    NA    NA ENSG00000127663.14                     protein_coding       KNOWN         KDM4B     2  OTTHUMG00000180281.4 ENST00000381759.8       protein_coding
+# ENST00000429684.1 HAVANA transcript    NA    NA  ENSG00000225813.1               processed_pseudogene       KNOWN    AC009299.4     2  OTTHUMG00000153884.1 ENST00000429684.1 processed_pseudogene
+# ENST00000457898.1 HAVANA transcript    NA    NA  ENSG00000226029.1                            lincRNA       KNOWN  RP4-798A10.2     2  OTTHUMG00000002314.1 ENST00000457898.1              lincRNA
+# ENST00000301894.6 HAVANA transcript    NA    NA ENSG00000110076.18                     protein_coding       KNOWN         NRXN2     2 OTTHUMG00000045214.18 ENST00000301894.6       protein_coding
+#                   transcript_status   transcript_name transcript_support_level                    tag    havana_transcript exon_number exon_id         ont        protein_id      ccdsid
+# ENST00000623212.1             KNOWN  RP11-173D3.4-001                       NA                  basic OTTHUMT00000431140.1        <NA>    <NA>        <NA>              <NA>        <NA>
+# ENST00000507754.8             KNOWN       NDUFA13-001                        1                   CCDS OTTHUMT00000367916.6        <NA>    <NA>        <NA> ENSP00000423673.1 CCDS12404.2
+# ENST00000602936.1             KNOWN       HDAC1P2-002                       NA                  basic OTTHUMT00000467811.1        <NA>    <NA>        <NA>              <NA>        <NA>
+# ENST00000636670.1             KNOWN       CACNA1A-056                     <NA> RNA_Seq_supported_only OTTHUMT00000489462.1        <NA>    <NA>        <NA>              <NA>        <NA>
+# ENST00000540997.2             KNOWN RP11-504P24.3-006                       NA                  basic OTTHUMT00000478307.1        <NA>    <NA>        <NA>              <NA>        <NA>
+# ENST00000489327.1             KNOWN          AAK1-005                        5                   <NA> OTTHUMT00000327346.1        <NA>    <NA>        <NA>              <NA>        <NA>
+# ENST00000381759.8             KNOWN         KDM4B-011                        1                  basic OTTHUMT00000450559.1        <NA>    <NA>        <NA> ENSP00000371178.3        <NA>
+# ENST00000429684.1             KNOWN    AC009299.4-001                       NA                  basic OTTHUMT00000332841.1        <NA>    <NA> PGO:0000004              <NA>        <NA>
+# ENST00000457898.1             KNOWN  RP4-798A10.2-001                        2                  basic OTTHUMT00000006685.1        <NA>    <NA>        <NA>              <NA>        <NA>
+# ENST00000301894.6             KNOWN         NRXN2-003                        5                   CCDS OTTHUMT00000141952.1        <NA>    <NA>        <NA> ENSP00000301894.2  CCDS8078.1
+#                         logFC   AveExpr         t      P.Value    adj.P.Val        B
+# ENST00000623212.1  0.01452433 0.5526962  16.03968 1.205789e-10 6.249316e-06 12.38480
+# ENST00000507754.8 -0.01902535 5.0288771 -16.01634 1.230275e-10 6.249316e-06 12.36339
+# ENST00000602936.1  0.01856818 1.0348904  15.79744 1.487400e-10 6.249316e-06 12.16128
+# ENST00000636670.1  0.03684928 1.6021253  15.72812 1.580311e-10 6.249316e-06 12.09676
+# ENST00000540997.2  0.01946838 1.2727543  15.40293 2.106675e-10 6.249316e-06 11.79064
+# ENST00000489327.1  0.02478279 1.3632369  15.26295 2.388181e-10 6.249316e-06 11.65711
+# ENST00000381759.8  0.01748177 0.7741020  15.07536 2.829856e-10 6.249316e-06 11.47646
+# ENST00000429684.1  0.03381886 2.2386163  14.80423 3.628540e-10 6.249316e-06 11.21182
+# ENST00000457898.1  0.01719272 1.2009255  14.77432 3.730345e-10 6.249316e-06 11.18237
+# ENST00000301894.6  0.03929402 2.1438709  14.72692 3.897966e-10 6.249316e-06 11.13559
 
+pdf(file.path(dir_plots, "qSV1_top10_vs_COI.pdf"))
 boxplot(
-    qsva_list$tpm_top10$qSVs ~ pheno$COI,
+    qsva_list$tpm_top10$qSVs ~ rse_tx$COI,
     ylab = paste0(
         "qSV1 (top10 Tx: ", qsva_list$tpm_top10$varExpl[1],
         "% Var Expl)"
     ),
     xlab = ""
 )
+dev.off()
 
 
 ### check qSV vs COI
 apply(qsva_list$tpm_standard$qSVs, 2, function(x) {
-    t.test(x ~ pheno$COI)$p.value
+    t.test(x ~ rse_tx$COI)$p.value
 })
+#          PC1          PC2          PC3          PC4          PC5          PC6          PC7          PC8          PC9         PC10
+# 3.130702e-27 2.474994e-01 4.735134e-51 4.858927e-04 4.986386e-19 9.987815e-01 1.330729e-06 5.471337e-02 1.682187e-01 2.552738e-01
 apply(qsva_list$tpm_cell$qSVs, 2, function(x) {
-    t.test(x ~ pheno$COI)$p.value
+    t.test(x ~ rse_tx$COI)$p.value
 })
+#          PC1          PC2          PC3          PC4          PC5          PC6          PC7          PC8          PC9         PC10         PC11         PC12
+# 1.049906e-35 9.237539e-09 6.699887e-27 7.276874e-03 1.313578e-27 8.246924e-02 3.104048e-01 1.292980e-01 2.785985e-02 9.449539e-01 4.622598e-01 2.970995e-01
+#         PC13         PC14         PC15         PC16
+# 3.416701e-01 2.116482e-07 5.622145e-01 1.510465e-01
 
 ## top qSV is very correlated
 cor(qsva_list$tpm_standard$qSVs[, 1], qsva_list$tpm_cell$qSVs[, 1])
+# [1] 0.9943452
 
 qsva_list$tpm_standard$varExpl
-
+# [1] 63.200  6.170  5.020  3.270  2.920  1.620  1.220  1.030  0.917  0.681
 
 boxplot(
-    qsva_list$tpm_standard$qSVs[, 1] ~ pheno$COI,
+    qsva_list$tpm_standard$qSVs[, 1] ~ rse_tx$COI,
     ylab = paste0(
         "qSV1 (standard: ",
         qsva_list$tpm_standard$varExpl[1],
@@ -227,7 +293,7 @@ boxplot(
     ),
     xlab = ""
 )
-boxplot(qsva_list$tpm_cell[, 1] ~ pheno$COI,
+boxplot(qsva_list$tpm_cell[, 1] ~ rse_tx$COI,
     ylab = "qSV1 (cell)",
     xlab = ""
 )
@@ -235,7 +301,7 @@ boxplot(qsva_list$tpm_cell[, 1] ~ pheno$COI,
 
 ### read in rnaseq metrics
 metrics <- read.csv("phenotype/LBP_merged_seqmetrics.csv")
-metrics <- metrics[match(pheno$specimenID, metrics$external_id), ]
+metrics <- metrics[match(rse_tx$specimenID, metrics$external_id), ]
 plot(
     qsva_list$tpm_top10$qSVs,
     metrics$recount_qc.intron_sum_perc
