@@ -369,28 +369,27 @@ dev.off()
 
 ###########
 ## de checks
-rse_tx$race[rse_tx$race == "White "] <- "White"
-rse_tx$race[rse_tx$race == ""] <- "Unknown"
-rse_tx$diagnosis[rse_tx$diagnosis == "Parkinson's disease "] <- "Parkinson's disease"
-rse_tx$samplingAge[rse_tx$samplingAge == "89+"] <- 89
-rse_tx$samplingAge <- as.numeric(rse_tx$samplingAge)
-rownames(pheno) <- rse_tx$specimenID
-rse_tx$diagnosis <- factor(rse_tx$diagnosis)
-rse_tx$diagnosis <- relevel(rse_tx$diagnosis, "control")
 
-pheno <- cbind(pheno, metrics)
+## For simplicity later on, I'll use this variable name
+rse_tx$samplingAge <- rse_tx$ageDeath_num.biospecimen
+
+## add cell comp PCs
+cellProps <- read.csv(here("processed-data", "05_check_gene_exprs", "LBP_burkeDecon.csv"), row.names = 1)
+cellProps <- cellProps[colnames(rse_gene), ]
+cellPca <- prcomp(cellProps)
+getPcaVars(cellPca)[1:2]
+# [1] 79.0 11.1
+rse_tx$cellPC <- cellPca$x[, 1]
 
 ## model
 mod <- model.matrix(
     ~ COI + race + sex + diagnosis +
-        rin + cellPC + recount_qc.star.uniquely_mapped_reads_perc +
-        recount_qc.aligned_readsperc.chrm +
-        recount_qc.aligned_readsperc.chrx +
-        recount_qc.bc_auc.all_perc +
-        recount_qc.star.perc_of_reads_mapped_to_multiple_loci +
-        recount_qc.gene_fc.all_perc +
-        recount_qc.junction_avg_coverage,
-    data = pheno
+        RIN + cellPC +
+        mitoRate +
+        totalAssignedGene +
+        rRNA_rate +
+        overallMapRate,
+    data = colData(rse_tx)
 )
 
 ## modeling
