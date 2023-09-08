@@ -409,14 +409,20 @@ out <- topTable(
 ## against degradation
 out_top10000 <- out[order(out$P.Value)[1:10000], ]
 degradation_tstats_top10000 <- degradation_tstats[match(
-    ss(out_top10000$transcript_id, "\\."),
-    ss(rownames(degradation_tstats), "\\.")
+    out_top10000$transcript_id,
+    degradation_tstats$transcript_id
 ), ]
+pdf(file.path(dir_plots, "top10k_t_vs_degradation_t.pdf"))
 plot(out_top10000$t, degradation_tstats_top10000$t)
+dev.off()
 tt_10000 <- table(`PM>LIV` = out_top10000$t > 0, `Degrade>0` = degradation_tstats_top10000$t > 0)
 tt_10000
-getOR(tt_10000) # 13.6
-
+#        Degrade>0
+# PM>LIV  FALSE TRUE
+#   FALSE    11   14
+#   TRUE    920 9055
+getOR(tt_10000)
+# [1] 7.733307
 
 #####
 f_standard <- lmFit(log2(tpm + 1), cbind(mod, qsva_list$tpm_standard$qSVs))
@@ -438,8 +444,50 @@ out_cell <- topTable(
 )
 
 cor(out_cell$t, out$t)
+# [1] 0.1251368
+pdf(file.path(dir_plots, "smootScatter_out_cell_t_vs_out_t.pdf"))
 smoothScatter(out_cell$t, out$t)
+dev.off()
+
+cor(out_standard$t, out$t)
+# [1] 0.09316496
+pdf(file.path(dir_plots, "smootScatter_out_standard_t_vs_out_t.pdf"))
+smoothScatter(out_standard$t, out$t)
+dev.off()
+
+cor(out_cell$t, out_standard$t)
+# [1] 0.6607493
+pdf(file.path(dir_plots, "smootScatter_out_cell_t_vs_out_standard_t.pdf"))
+smoothScatter(out_cell$t, out_standard$t)
+dev.off()
+
 out_cell[order(out_cell$P.Value)[1:25], c("gene_name", "t", "P.Value")]
+#                       gene_name          t      P.Value
+# ENST00000563103.1 CTD-2651B20.6 -17.244021 3.012677e-52
+# ENST00000585776.5  RP11-383M4.6  12.950420 4.001028e-33
+# ENST00000385129.3        MIR27B -12.623045 9.281923e-32
+# ENST00000411199.1     RNA5SP304 -12.343306 1.320583e-30
+# ENST00000517961.3    AC084082.3 -11.716965 4.508522e-28
+# ENST00000546283.5        NDUFS7 -10.264858 1.727036e-22
+# ENST00000305943.7        RNF187 -10.109974 6.403418e-22
+# ENST00000412681.2          NRGN -10.100416 6.939923e-22
+# ENST00000601154.1         CCDC9   9.944578 2.559176e-21
+# ENST00000527676.2          ETS1   9.556798 6.216946e-20
+# ENST00000546428.2      SLC25A21   9.457360 1.389995e-19
+# ENST00000568314.1 CTD-2651B20.7  -9.411831 2.005386e-19
+# ENST00000362263.3      MIRLET7D  -9.385210 2.483319e-19
+# ENST00000394067.6          KLC2  -9.324177 4.047737e-19
+# ENST00000558365.1     ADAMTS7P4   9.316018 4.320203e-19
+# ENST00000506696.1          SNCB  -9.223221 9.039253e-19
+# ENST00000367906.7          RGS4  -9.043146 3.733165e-18
+# ENST00000239223.3         DUSP1   8.958207 7.239665e-18
+# ENST00000310112.7          SNCB  -8.937419 8.508062e-18
+# ENST00000590926.1         APLP1  -8.922216 9.572649e-18
+# ENST00000315707.3     LINC00324  -8.752419 3.538215e-17
+# ENST00000335312.7       PIP5K1C  -8.749487 3.618438e-17
+# ENST00000624231.1 RP11-114G11.4   8.631707 8.866434e-17
+# ENST00000414364.1     KIF25-AS1   8.571490 1.397360e-16
+# ENST00000553375.1       ZFP36L1   8.309787 9.826687e-16
 
 f_top100 <- lmFit(log2(tpm + 1), cbind(mod, qsva_list$tpm_top100$qSVs))
 out_top100 <- topTable(
@@ -451,9 +499,17 @@ out_top100 <- topTable(
 )
 
 table(out$adj.P.Val < 0.05)
+# FALSE   TRUE
+# 84546 111892
 table(out_standard$adj.P.Val < 0.05)
+#  FALSE   TRUE
+# 175870  20568
 table(out_cell$adj.P.Val < 0.05)
+#  FALSE   TRUE
+# 191289   5149
 table(out_top100$adj.P.Val < 0.05)
+#  FALSE   TRUE
+# 154976  41462
 
 degradation_tstats_out <- degradation_tstats[match(out$transcript_id, rownames(degradation_tstats)), ]
 
