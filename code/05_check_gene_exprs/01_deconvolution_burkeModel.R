@@ -11,9 +11,9 @@ library("sessioninfo")
 set.seed(20230907)
 
 ## Create output directories
-dir_plots <- here("plots", "04_check_gene_exprs")
+dir_plots <- here("plots", "05_check_gene_exprs")
 dir.create(dir_plots, showWarnings = FALSE, recursive = TRUE)
-dir_rdata <- here("processed-data", "04_check_gene_exprs")
+dir_rdata <- here("processed-data", "05_check_gene_exprs")
 dir.create(dir_rdata, showWarnings = FALSE, recursive = TRUE)
 
 ## read in decon
