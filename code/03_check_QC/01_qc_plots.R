@@ -89,6 +89,8 @@ log_rpkm <-
     rpkm(dge, gene.length = rowData(rse_gene)$Length, log = TRUE)
 pca <- prcomp(t(log_rpkm))
 pcaVars <- getPcaVars(pca)
+pcaVars[1:10]
+# [1] 27.600  6.150  4.610  2.870  2.360  1.920  1.780  1.440  1.110  0.919
 
 pcHeatmap(rse_gene, pca, plotdir = dir_plots, pthresh = 20)
 
