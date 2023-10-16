@@ -1,5 +1,7 @@
 # living_brain_reanalysis
 
+[![DOI](https://zenodo.org/badge/670288774.svg)](https://zenodo.org/doi/10.5281/zenodo.10010510)
+
 Re-analysis of the data from Liharska et al. [10.1101/2023.04.21.23288916](https://doi.org/10.1101/2023.04.21.23288916). 
 
 > A study of gene expression in the living human brain
