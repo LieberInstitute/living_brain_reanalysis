@@ -20,4 +20,4 @@ Limma-voom gene-level differential expression results between LIV and PM samples
 
 ## Table S5
 
-Limma transcript-level differential expression results between (a) LIV and PM samples or (b) by RNA degradation (Jaffe et al., _PNAS_, 2017). Data from this table is used for **Figure 1E**.Created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/3a11b296b70b6b8a81911d9e5800cc5f9f6b889f/code/05_check_degradation/02_check_deg_matrix.R#L568).
+Limma transcript-level differential expression results between (a) LIV and PM samples or (b) by RNA degradation (Jaffe et al., _PNAS_, 2017). Data from this table is used for **Figure 1E**. Created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/3a11b296b70b6b8a81911d9e5800cc5f9f6b889f/code/05_check_degradation/02_check_deg_matrix.R#L568).
