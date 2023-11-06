@@ -52,6 +52,7 @@ pcHeatmap <-
             )
         )
         dev.off()
+        return(pvalPcaMetrics)
     }
 
 ## Create output directory for plots
@@ -92,7 +93,9 @@ pcaVars <- getPcaVars(pca)
 pcaVars[1:10]
 # [1] 27.600  6.150  4.610  2.870  2.360  1.920  1.780  1.440  1.110  0.919
 
-pcHeatmap(rse_gene, pca, plotdir = dir_plots, pthresh = 20)
+pcMat <- pcHeatmap(rse_gene, pca, plotdir = dir_plots, pthresh = 20)
+dir.create(here("processed-data", "SupplementaryTables"))
+write.csv(pcMat, file = here("processed-data", "SupplementaryTables", "Table1.csv"))
 
 ###### example plots
 vars <-
