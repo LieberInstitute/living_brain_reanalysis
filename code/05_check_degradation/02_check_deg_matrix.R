@@ -549,17 +549,17 @@ abline(h = 0, v = 0, lty = 2)
 dev.off()
 
 ## Merge all transcript-level results into a table we can export
-merged_casectrl <- out
+merged_LIV_vs_PM <- out
 merged_deg <- degradation_tstats_out
 merged_vars <- c("AveExpr", "logFC", "t", "P.Value", "adj.P.Val", "B")
-merged_casectrl <-
-    merged_casectrl[, c(colnames(merged_casectrl)[!colnames(merged_casectrl) %in% merged_vars], merged_vars)]
-colnames(merged_casectrl)[colnames(merged_casectrl) %in% merged_vars] <-
-    paste0("case_vs_control_", colnames(merged_casectrl)[colnames(merged_casectrl) %in% merged_vars])
-stopifnot(identical(merged_deg$transcript_id, merged_casectrl$transcript_id))
+merged_LIV_vs_PM <-
+    merged_LIV_vs_PM[, c(colnames(merged_LIV_vs_PM)[!colnames(merged_LIV_vs_PM) %in% merged_vars], merged_vars)]
+colnames(merged_LIV_vs_PM)[colnames(merged_LIV_vs_PM) %in% merged_vars] <-
+    paste0("LIV_vs_PM_", colnames(merged_LIV_vs_PM)[colnames(merged_LIV_vs_PM) %in% merged_vars])
+stopifnot(identical(merged_deg$transcript_id, merged_LIV_vs_PM$transcript_id))
 merged_deg <- merged_deg[, merged_vars]
 colnames(merged_deg) <- paste0("degradation_", colnames(merged_deg))
-merged_all <- cbind(merged_casectrl, merged_deg)
+merged_all <- cbind(merged_LIV_vs_PM, merged_deg)
 rownames(merged_all) <- NULL
 merged_all <- merged_all[, sapply(merged_all, function(x) sum(is.na(x))) == 0]
 merged_all$gene_status <- merged_all$transcript_status <- NULL
