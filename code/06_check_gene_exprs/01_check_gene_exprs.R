@@ -206,6 +206,34 @@ abline(0,
 )
 dev.off()
 
+
+## Merge all gene-level results into a table we can export
+merged_res <- res_match
+merged_res$ensembl_id <- NULL
+colnames(merged_res) <- paste0("original_", colnames(merged_res))
+merged_no_qsva <- outGene
+merged_no_qsva$ensembl_id <- NULL
+merged_vars <- c("logFC", "t", "P.Value", "adj.P.Val", "B")
+merged_no_qsva <-
+    merged_no_qsva[, c(colnames(merged_no_qsva)[!colnames(merged_no_qsva) %in% merged_vars], merged_vars)]
+colnames(merged_no_qsva)[colnames(merged_no_qsva) %in% merged_vars] <-
+    paste0("without_qSVA_", colnames(merged_no_qsva)[colnames(merged_no_qsva) %in% merged_vars])
+merged_with_qsva <- outGene_qsva
+stopifnot(identical(merged_no_qsva$isExprs, merged_with_qsva$isExprs))
+stopifnot(identical(merged_no_qsva$AveExpr, merged_with_qsva$AveExpr))
+merged_with_qsva <- merged_with_qsva[, merged_vars]
+colnames(merged_with_qsva) <-
+    paste0("with_qSVA_", colnames(merged_with_qsva))
+
+merged_all <- cbind(merged_no_qsva, merged_with_qsva, merged_res)
+rownames(merged_all) <- NULL
+merged_all$Class <- merged_all$NumTx <- merged_all$gencodeTx <- NULL
+write.csv(
+    merged_all,
+    file = here("processed-data", "SupplementaryTables", "TableS4.csv"),
+    row.names = FALSE
+)
+
 ###########
 ## age in liv
 rse_liv <- rse_gene[, rse_gene$COI == "LIV"]
