@@ -379,7 +379,7 @@ rse_tx$race[is.na(rse_tx$race)] <- "Unknown"
 
 ## add cell comp PCs
 cellProps <- read.csv(here("processed-data", "04_deconvolution", "LBP_burkeDecon.csv"), row.names = 1)
-cellProps <- cellProps[colnames(rse_gene), ]
+cellProps <- cellProps[colnames(rse_tx), ]
 cellPca <- prcomp(cellProps)
 getPcaVars(cellPca)[1:2]
 # [1] 79.0 11.1
@@ -450,13 +450,13 @@ smoothScatter(out_cell$t, out$t)
 dev.off()
 
 cor(out_standard$t, out$t)
-# [1] 0.09316496
+# [1] 0.1123818
 pdf(file.path(dir_plots, "smootScatter_out_standard_t_vs_out_t.pdf"))
 smoothScatter(out_standard$t, out$t)
 dev.off()
 
 cor(out_cell$t, out_standard$t)
-# [1] 0.6607493
+# [1] 0.6605775
 pdf(file.path(dir_plots, "smootScatter_out_cell_t_vs_out_standard_t.pdf"))
 smoothScatter(out_cell$t, out_standard$t)
 dev.off()
@@ -503,7 +503,7 @@ table(out$adj.P.Val < 0.05)
 # 84546 111892
 table(out_standard$adj.P.Val < 0.05)
 #  FALSE   TRUE
-# 175870  20568
+# 177598  18840
 table(out_cell$adj.P.Val < 0.05)
 #  FALSE   TRUE
 # 191289   5149
@@ -548,6 +548,26 @@ cex = 1.5
 abline(h = 0, v = 0, lty = 2)
 dev.off()
 
+## Merge all transcript-level results into a table we can export
+merged_casectrl <- out
+merged_deg <- degradation_tstats_out
+merged_vars <- c("AveExpr", "logFC", "t", "P.Value", "adj.P.Val", "B")
+merged_casectrl <-
+    merged_casectrl[, c(colnames(merged_casectrl)[!colnames(merged_casectrl) %in% merged_vars], merged_vars)]
+colnames(merged_casectrl)[colnames(merged_casectrl) %in% merged_vars] <-
+    paste0("case_vs_control_", colnames(merged_casectrl)[colnames(merged_casectrl) %in% merged_vars])
+stopifnot(identical(merged_deg$transcript_id, merged_casectrl$transcript_id))
+merged_deg <- merged_deg[, merged_vars]
+colnames(merged_deg) <- paste0("degradation_", colnames(merged_deg))
+merged_all <- cbind(merged_casectrl, merged_deg)
+rownames(merged_all) <- NULL
+merged_all <- merged_all[, sapply(merged_all, function(x) sum(is.na(x))) == 0]
+merged_all$gene_status <- merged_all$transcript_status <- NULL
+write.csv(
+    merged_all,
+    file = here("processed-data", "SupplementaryTables", "TableS5.csv"),
+    row.names = FALSE
+)
 
 # ######################
 #### example plots #####
