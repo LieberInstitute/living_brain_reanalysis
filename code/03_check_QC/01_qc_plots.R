@@ -95,7 +95,7 @@ pcaVars[1:10]
 
 pcMat <- pcHeatmap(rse_gene, pca, plotdir = dir_plots, pthresh = 20)
 dir.create(here("processed-data", "SupplementaryTables"))
-write.csv(pcMat, file = here("processed-data", "SupplementaryTables", "Table1.csv"))
+write.csv(pcMat, file = here("processed-data", "SupplementaryTables", "TableS1.csv"))
 
 ###### example plots
 vars <-
