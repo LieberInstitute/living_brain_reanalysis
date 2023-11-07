@@ -10,6 +10,12 @@ Re-analysis of the data from Liharska et al. [10.1101/2023.04.21.23288916](https
 
 The results published here are in whole or in part based on data obtained from the [AD Knowledge Portal](https://adknowledgeportal.org/). Specifically, we downloaded the data (FASTQ raw files and phenotype data tables) from [Synapse (syn26337520)](https://adknowledgeportal.synapse.org/Explore/Studies/DetailsPage/StudyData?Study=syn26337520).
 
+# Processed-data
+
+* The gene level LBP dataset re-processed by _SPEAQeasy_ is available at [processed-data/02_SPEAQeasy/rse_gene_living_brain_reanalysis_n516.Rds](processed-data/02_SPEAQeasy/rse_gene_living_brain_reanalysis_n516.Rds). It is available as a [_SummarizedExperiment_](https://bioconductor.org/packages/SummarizedExperiment/) R/Bioconductor object. It was created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/00e469cb1e029717cd6ca407ea6f06e7d0bb8100/code/02_SPEAQeasy/03-update_pheno.R#L267).
+* The transcript level LBP dataset re-processed by _SPEAQeasy_ is available at [processed-data/02_SPEAQeasy/rse_tx_living_brain_reanalysis_n516.Rds](processed-data/02_SPEAQeasy/rse_tx_living_brain_reanalysis_n516.Rds). Given that this is a 807 MB file, it is available with [GIT LFS](https://git-lfs.com/). It was created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/00e469cb1e029717cd6ca407ea6f06e7d0bb8100/code/02_SPEAQeasy/03-update_pheno.R#L283).
+* The transcript level RNA degradation dataset from Jaffe et al., _PNAS_, 2017 processed by _recount3_ is available at [processed-data/05_check_degradation/rse_degrade_tx.Rds](processed-data/05_check_degradation/rse_degrade_tx.Rds). It was created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/00e469cb1e029717cd6ca407ea6f06e7d0bb8100/code/05_check_degradation/01_combine_recount3_salmon_output.R#L74-L82).
+
 # Supplementary Tables
 
 See [processed-data/SupplementaryTables](processed-data/SupplementaryTables/) for all supplementary tables. The descriptions include GitHub permalinks to the scripts that made them.
