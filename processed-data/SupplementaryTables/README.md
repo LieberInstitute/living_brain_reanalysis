@@ -9,13 +9,13 @@ Created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/d
 
 ## Table S2
 
-Merged sequencing metrics produced by _SPEAQeasy_, first principal component from the estimated cell type proportions (_cellPC_), and other sample demographic information. See <https://research.libd.org/SPEAQeasy/outputs.html#quality-metrics> for details about the _SPEAQeasy_ alignment metrics. Data from this table is used for **Figure 1B**.
+Merged sequencing metrics produced by _SPEAQeasy_; see <https://research.libd.org/SPEAQeasy/outputs.html#quality-metrics> for details about the _SPEAQeasy_ alignment metrics. Sample IDs are the same ones used by Liharska et al and were not known to anyone outside the research group. There were Data from this table is used for **Figure 1B**.
 
 Created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/dbe7d06ff7bc148eb29a9fac11f5839d5a1a31ce/code/06_check_gene_exprs/01_check_gene_exprs.R#L45).
 
 ## Table S3
 
-Per sample, estimated cell type proportions via deconvolution. Data from this table is used for **Figure 1C**.
+Per sample, estimated cell type proportions via deconvolution. Sample IDs are the same ones used by Liharska et al and were not known to anyone outside the research group. Data from this table is used for **Figure 1C**.
 
 Created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/c856e4712d469630cd5618d136f17477dd0275ae/code/04_deconvolution/01_deconvolution_burkeModel.R#L49).
 
