@@ -28,10 +28,23 @@ Files are organized following the structure from [LieberInstitute/template_proje
 
 # Citation
 
-We hope that this repository will be useful for your research. Please use the following [BibTeX](https://en.wikipedia.org/wiki/BibTeX) information to cite this code repository as well as the commentary paper. Thank you!
+We hope that this repository will be useful for your research. Please use the following [BibTeX](https://en.wikipedia.org/wiki/BibTeX) information to cite this code repository as well as our re-analysis of the Liharska et al Living Brain Study dataset. Thank you!
+
+> **Comparison of gene expression in living and postmortem human brain**
+> Leonardo Collado-Torres, Lambertus Klei, Chunyu Liu, Joel E Kleinman, Thomas M Hyde, Daniel H Geschwind, Michael J Gandal, Bernie Devlin, Daniel R Weinberger
+> medRxiv 2023.11.08.23298172; doi: <https://doi.org/10.1101/2023.11.08.23298172>
 
 ```
-@article {TODO
+@article {Collado-Torres2023.11.08.23298172,
+	author = {Leonardo Collado-Torres and Lambertus Klei and Chunyu Liu and Joel E Kleinman and Thomas M Hyde and Daniel H Geschwind and Michael J Gandal and Bernie Devlin and Daniel R Weinberger},
+	title = {Comparison of gene expression in living and postmortem human brain},
+	elocation-id = {2023.11.08.23298172},
+	year = {2023},
+	doi = {10.1101/2023.11.08.23298172},
+	publisher = {Cold Spring Harbor Laboratory Press},
+	URL = {https://www.medrxiv.org/content/early/2023/11/09/2023.11.08.23298172},
+	eprint = {https://www.medrxiv.org/content/early/2023/11/09/2023.11.08.23298172.full.pdf},
+	journal = {medRxiv}
 }
 ```
 
