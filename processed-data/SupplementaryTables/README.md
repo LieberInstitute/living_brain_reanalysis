@@ -11,7 +11,7 @@ Created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/d
 
 Merged sequencing metrics produced by _SPEAQeasy_; see <https://research.libd.org/SPEAQeasy/outputs.html#quality-metrics> for details about the _SPEAQeasy_ alignment metrics. Sample IDs are the same ones used by Liharska et al and were not known to anyone outside the research group. There were Data from this table is used for **Figure 1B**.
 
-Created [here](https://github.com/LieberInstitute/living_brain_reanalysis/blob/dbe7d06ff7bc148eb29a9fac11f5839d5a1a31ce/code/06_check_gene_exprs/01_check_gene_exprs.R#L45).
+Created by _SPEAQeasy_.
 
 ## Table S3
 
